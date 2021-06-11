@@ -129,12 +129,12 @@ dmypy.json
 .pyre/
 
 # OpenDataUitspraken
-OpenDataUitspraken
+DataSets/OpenDataUitspraken
 
 # lidodata
-lidodata
+DataSets/lidodata
 
 # kan later weg
-finalDecisions
+DataSets/finalDecisions
 Future.csv
 Total.csv

@@ -16,10 +16,10 @@ missingReference = 0
 decisionList = []
 errorList = []
 
-#file = "lidodata"
-file = "finalDecisions"
+#file = "DataSets/lidodata"
+file = "DataSets/finalDecisions"
 folder = os.getcwd() + '/'
-folder2 = folder + "OpenDataUitspraken/" # Uitkijken, als je de map als argument meegeeft aan de functie, dan geef je die meestal mee zonder / op het einde
+folder2 = folder + "DataSets/OpenDataUitspraken/" # Uitkijken, als je de map als argument meegeeft aan de functie, dan geef je die meestal mee zonder / op het einde
 csvTotal = folder + "Total.csv"
 csvFuture = folder + "Future.csv"
 
