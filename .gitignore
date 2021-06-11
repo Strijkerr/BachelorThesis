@@ -136,5 +136,5 @@ DataSets/lidodata
 
 # kan later weg
 DataSets/finalDecisions
-Future.csv
-Total.csv
+CSV/Future.csv
+CSV/Total.csv

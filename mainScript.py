@@ -20,8 +20,8 @@ errorList = []
 file = "DataSets/finalDecisions"
 folder = os.getcwd() + '/'
 folder2 = folder + "DataSets/OpenDataUitspraken/" # Uitkijken, als je de map als argument meegeeft aan de functie, dan geef je die meestal mee zonder / op het einde
-csvTotal = folder + "Total.csv"
-csvFuture = folder + "Future.csv"
+csvTotal = folder + "CSV/Total.csv"
+csvFuture = folder + "CSV/Future.csv"
 
 rows = []
 rows_f = []
