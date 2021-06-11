@@ -27,80 +27,6 @@ rows = []
 rows_f = []
 fields = ["ECLI","Ref_ECLI","Anchor text","Paragraph"]
 
-def Patterns(citation) :
-    # Bijna alles hier te vinden: https://documents.library.maastrichtuniversity.nl/open/c2de5acb-006a-4836-860a-eeb1fb721b94
-    pattern_ECLI = r"(ECLI:(.+:)?.+:\d\d\d\d:.+)|(.+:.+:\d\d\d\d:.+)" # e.g. ECLI:NL:PHR:1981:AC3210
-    pattern_BNB = r"BNB,? +\d\d\d\d" # "Beslissingen in belastingzaken, Nederlandse Belastingrechtspraak, afkorting BNB, is een juridisch vaktijdschrift voor Nederlandse jurisprudentie op het gebied van belastingrecht". - Wikipedia
-    pattern_NJ = r"N\.?J\.? *\d\d\d\d" # "Nederlandse Jurisprudentie (NJ) is een tijdschrift waarin uitsluitend gerechtelijke uitspraken worden gepubliceerd." - wikipedia
-    pattern_VN = r"V-?N,? +\d\d\d\d" 
-    pattern_USZ = r"USZ,? +\d\d\d\d" # "Met het tijdschrift Uitspraken Sociale Zekerheid « USZ » heeft u snel inzicht in actuele socialezekerheidsrechtspraak!" SDU.nl
-    pattern_LJN = r"LJN*" # "Het Landelijk Jurisprudentie Nummer of LJN is een unieke codering die tot juni 2013 gegeven werd aan elke gerechtelijke uitspraak in Nederland die werd gepubliceerd.", wikipedia
-    pattern_RSV = r"RSV,? +\d\d\d\d" # RSV bevat alle belangrijke jurisprudentie op het terrein van de sociale zekerheid. Hier vindt u alle uitspraken die vanaf 1987 tot heden ook in het tijdschrift RSV gepubliceerd zijn. - navigator.nl
-    pattern_TAR  = r"TAR,? +\d\d\d\d" # Tijdschrift voor Ambtenarenrecht
-    pattern_JV = r"JV,? +\d\d\d\d" # Het tijdschrift Jurisprudentie Vreemdelingenrecht (JV)
-    pattern_HR = r"(H\.?R\.? +\d)|(Hoge Raad,? .+)" # Hoge raad
-    pattern_BR = r"BR,? +\d\d\d\d" # Het tijdschrift Bouwrecht staat in de markt bekend als hét maandblad voor rechtspraak en literatuur op het gebied van het bouwrecht. - https://www.wolterskluwer.nl
-    pattern_IER = r"IER,? +\d\d\d\d" # Dit tijdschrift biedt informatie en opiniërende artikelen over auteursrecht, merkenrecht, octrooirecht, modellenrecht, kwekersrecht, handelsnaamrecht, onrechtmatige publicatie, het recht inzake misleidende reclame, mededingingsrecht en reclamerecht. - https://www.wolterskluwer.nl
-    pattern_AB = r"AB,? +\d\d\d\d" # AB Rechtspraak Bestuursrecht is een tijdschrift waarin uitsluitend de belangrijkste uitspraken op het gebied van het Nederlandse bestuursrecht, milieurecht, ambtenarenrecht, bouwrecht, sociaal-verzekeringsrecht, onderwijsrecht en vreemdelingenrecht worden gepubliceerd. - wikipedia
-
-    pattern_JB = r"JB,? +\d\d\d\d" # Jurisprudentie Bestuursrecht
-    pattern_WFR = r"WFR,? +\d\d\d\d" # Weekblad voor Fiscaal Recht
-    pattern_HvJ = r"(HvJ\)? .+)|(Hof van Justitie van \d)|(HvJEG .+)" # Hof van Justitie
-    pattern_RvdW = r"RvdW,? \d\d\d\d" # Rechtspraak van de week
-    pattern_RV = r"RV,? +\d\d\d\d" # Rechtspraak vreemdelingenrecht
-    pattern_KG = r"KG,? +\d\d\d\d" # Kort geding (Tijdschrift is opgeheven per 1-1-2004. Opgegaan in Nederlandse Jurisprudentie feitenrechtspraak (NJF))
-    pattern_NJO = r"NJO,? +\d\d\d\d" # NJ Onteigening (Tijdschrift is opgeheven.)
-    pattern_DD = r"D\.?D\.? +\d\d" # Delikt en Delinkwent
-    pattern_JAR = r"JAR,? +\d\d\d\d"
-    pattern_VR = r"VR,? +\d\d\d\d"
-    pattern_JSV = r"JSV,? +\d\d\d\d"
-    pattern_EHRM = r"EHRM .*"
-    pattern_FED = r"FED,? +\d\d\d\d"
-    pattern_NTFR = r"NTFR,? +\d\d\d\d"
-    pattern_rechtbank = r"rechtbank .+ van \d"
-    pattern_Gerechtshof = r"(Gerechtshof (te )?.+ van \d)|(Hof .+ van \d)|(Hof .+ \d)"
-
-    pattern_JABW = r"JABW,? +\d\d\d\d"
-    pattern_NJB = r"NJB,? +\d\d\d\d"
-    pattern_Belastingblad = r"Belastingblad +\d\d\d\d"
-    pattern_EHRC = r"EHRC,? +\d\d\d\d"
-    pattern_RZA = r"RZA,? +\d\d\d\d"
-    pattern_Jur = r"(Jur. +\d\d\d\d)|(Jur. EG \d\d\d\d)|(Jurispr. \d\d\d\d)"
-    pattern_FJR = r"FJR,? +\d\d\d\d"
-
-    pattern_BIE = r"BIE,? +\d\d\d\d"
-    pattern_PRG = r"PRG.? +\d\d\d\d"
-    pattern_PJ = r"PJ,? +\d\d\d\d"
-    pattern_ELRO = r"ELRO +.+"
-
-    if not (re.match(pattern_ECLI, citation) or re.match(pattern_BNB, citation) or 
-        re.match(pattern_NJ, citation) or re.match(pattern_VN, citation) or
-        re.match(pattern_USZ, citation) or re.match(pattern_LJN, citation) or
-        re.match(pattern_RSV, citation) or re.match(pattern_TAR, citation) or 
-        re.match(pattern_HR, citation) or re.match(pattern_VR, citation) or 
-        re.match(pattern_BR, citation) or re.match(pattern_IER, citation) or 
-        re.match(pattern_AB, citation) or re.match(pattern_JB, citation) or 
-        re.match(pattern_WFR, citation) or re.match(pattern_HvJ, citation) or 
-        re.match(pattern_RvdW, citation) or re.match(pattern_RV, citation) or 
-        re.match(pattern_KG, citation) or re.match(pattern_NJO, citation) or 
-        re.match(pattern_DD, citation) or re.match(pattern_JAR, citation) or 
-        re.match(pattern_FED, citation) or re.match(pattern_JSV, citation) or 
-        re.match(pattern_EHRM, citation) or re.match(pattern_NTFR, citation) or 
-        re.match(pattern_rechtbank, citation) or re.match(pattern_Gerechtshof, citation, re.IGNORECASE) or 
-        re.match(pattern_JABW, citation) or re.match(pattern_NJB, citation) or 
-        re.match(pattern_Belastingblad, citation) or re.match(pattern_EHRC, citation) or 
-        re.match(pattern_RZA, citation) or re.match(pattern_EHRC, citation) or 
-        re.match(pattern_Jur, citation) or re.match(pattern_FJR, citation) or 
-        re.match(pattern_JV, citation) or re.match(pattern_BIE, citation) or 
-        re.match(pattern_PJ, citation) or re.match(pattern_ELRO, citation) or 
-        re.match(pattern_PRG, citation) or "nr." in citation or "no." in citation or 
-        "nummer" in citation) :
-        # if (citation.isnumeric()) :
-        #     print(name[1])
-        #     print(citation)
-        #     print(ref_ECLI)
-        print(citation)
-
 def makeFolder (folderName) :
     if not os.path.exists(folderName) : # Create folder and subfolders if they don't exist already
         os.makedirs(folderName)
@@ -112,8 +38,6 @@ def writeToCSV (csvDestination,rows,fields) :
         csvWriter.writerows(rows)
 
 def writeToRows(ECLI,file,citation,future) :
-    # if (ECLI == "ECLI:NL:HR:1984:AC8252" and citation == "NJ 1982, 411") :
-    #     print("hi")
     referenceFound = False
     parser2 = etree.parse(file)
     root = parser2.getroot()
