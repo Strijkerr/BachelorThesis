@@ -18,10 +18,10 @@ errorList = []
 
 #file = "lidodata"
 file = "finalDecisions"
-folder = "/home/jonathan/Desktop/"
-folder2 = "/home/jonathan/Desktop/OpenDataUitspraken/" # Uitkijken, als je de map als argument meegeeft aan de functie, dan geef je die meestal mee zonder / op het einde
-csvTotal = "/home/jonathan/Desktop/Total.csv"
-csvFuture = "/home/jonathan/Desktop/Future.csv"
+folder = os.getcwd() + '/'
+folder2 = folder + "OpenDataUitspraken/" # Uitkijken, als je de map als argument meegeeft aan de functie, dan geef je die meestal mee zonder / op het einde
+csvTotal = folder + "Total.csv"
+csvFuture = folder + "Future.csv"
 
 rows = []
 rows_f = []
