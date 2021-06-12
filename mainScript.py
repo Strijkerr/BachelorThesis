@@ -45,29 +45,42 @@ def writeToRows(ECLI,file,citation,future) :
     decision = root.find("{http://www.rechtspraak.nl/schema/rechtspraak-1.0}uitspraak") # Always only one 'uitspraak' section in court decision.
 
     if (abstract is not None) :
-        for child in abstract.findall(".//") : # All subelements in all levels beneath current node
-            if child.text is not None :
-                if (citation in child.text) :
+        for el in abstract.iter():
+            if (el.text is not None) :
+                if (citation in el.text) :
                     referenceFound = True
-                    row = [ECLI,ref_ECLI,citation,child.text]
+                    row = [ECLI,ref_ECLI,citation,el.text]
+                    if (future) :
+                        rows_f.append(row)
+                    else :
+                        rows.append(row)
+            if (el.tail is not None) :
+                if (citation in el.tail) :
+                    referenceFound = True
+                    row = [ECLI,ref_ECLI,citation,el.tail]
                     if (future) :
                         rows_f.append(row)
                     else :
                         rows.append(row)
     
     if (decision is not None) :
-        if (ECLI == "ECLI:NL:HR:1984:AC8252" and citation == "NJ 1982, 411") :
-            for el in decision.iter():
-                if (el.text is not None and el.text != '' and el.text != '\n') :
-                    print('%r' % (el.text))
-        for child in decision.findall(".//") : # All subelements in all levels beneath current node
-                # testString = etree.tostring((child))
-                # if (citation in testString.decode()) :
-                #     print(child)
-            if child.text is not None :
-                if (citation in child.text) :
+        for el in decision.iter():
+            if (el.text is not None) :
+                if (citation in el.text) :
+                    # if (ECLI == "ECLI:NL:HR:1984:AC8252" and citation == "NJ 1982, 411") :
+                    #     print("hi")
                     referenceFound = True
-                    row = [ECLI,ref_ECLI,citation,child.text]
+                    row = [ECLI,ref_ECLI,citation,el.text]
+                    if (future) :
+                        rows_f.append(row)
+                    else :
+                        rows.append(row)
+            if (el.tail is not None) :
+                if (citation in el.tail) :
+                    # if (ECLI == "ECLI:NL:HR:1984:AC8252" and citation == "NJ 1982, 411") :
+                    #     print("hi")
+                    referenceFound = True
+                    row = [ECLI,ref_ECLI,citation,el.tail]
                     if (future) :
                         rows_f.append(row)
                     else :
