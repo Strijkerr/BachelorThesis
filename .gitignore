@@ -138,3 +138,6 @@ DataSets/lidodata
 DataSets/finalDecisions
 CSV/Future.csv
 CSV/Total.csv
+CSV/EmptyC.csv
+CSV/EmptyR.csv
+CSV/Missing.csv
