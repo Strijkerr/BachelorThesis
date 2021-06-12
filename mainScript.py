@@ -127,7 +127,7 @@ try:
                                                     emptyCitation+=1
                                                     writeToRow("-","empty_citations")
                                                     makeRow = False
-                                                if (ref_ECLI == "!" or ref_ECLI == '\n') : # We only want references that refer to something
+                                                if (ref_ECLI == "!" or ref_ECLI == '\n' or ref_ECLI == '') : # We only want references that refer to something
                                                     emptyReference+=1
                                                     findReference(folder2 + ECLI_filename,"empty_references") # Als hij hem hierin niet vind, dan is het aantal rows niet gelijk aan #emptyReference
                                                     makeRow = False
