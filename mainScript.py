@@ -16,8 +16,8 @@ missingReference = 0
 decisionList = []
 errorList = []
 
-#file = "DataSets/lidodata"
-file = "DataSets/finalDecisions"
+file = "DataSets/lidodata"
+#file = "DataSets/finalDecisions"
 folder = os.getcwd() + '/'
 folder2 = folder + "DataSets/OpenDataUitspraken/" # Uitkijken, als je de map als argument meegeeft aan de functie, dan geef je die meestal mee zonder / op het einde
 csvTotal = folder + "CSV/Total.csv"
@@ -37,7 +37,15 @@ def writeToCSV (csvDestination,rows,fields) :
         csvWriter.writerow(fields) 
         csvWriter.writerows(rows)
 
-def writeToRows(ECLI,file,citation,future) :
+def writeToRow(paragraph,future) :
+    row = [ECLI,ref_ECLI,citation,paragraph]
+    if (future) :
+        rows_f.append(row)
+    else :
+        rows.append(row)
+    return True
+
+def findReference(file,future) :
     referenceFound = False
     parser2 = etree.parse(file)
     root = parser2.getroot()
@@ -48,43 +56,19 @@ def writeToRows(ECLI,file,citation,future) :
         for el in abstract.iter():
             if (el.text is not None) :
                 if (citation in el.text) :
-                    referenceFound = True
-                    row = [ECLI,ref_ECLI,citation,el.text]
-                    if (future) :
-                        rows_f.append(row)
-                    else :
-                        rows.append(row)
+                    referenceFound = writeToRow(el.text,future)
             if (el.tail is not None) :
                 if (citation in el.tail) :
-                    referenceFound = True
-                    row = [ECLI,ref_ECLI,citation,el.tail]
-                    if (future) :
-                        rows_f.append(row)
-                    else :
-                        rows.append(row)
+                    referenceFound = writeToRow(el.tail,future)
     
     if (decision is not None) :
         for el in decision.iter():
             if (el.text is not None) :
                 if (citation in el.text) :
-                    # if (ECLI == "ECLI:NL:HR:1984:AC8252" and citation == "NJ 1982, 411") :
-                    #     print("hi")
-                    referenceFound = True
-                    row = [ECLI,ref_ECLI,citation,el.text]
-                    if (future) :
-                        rows_f.append(row)
-                    else :
-                        rows.append(row)
+                    referenceFound = writeToRow(el.text,future)
             if (el.tail is not None) :
                 if (citation in el.tail) :
-                    # if (ECLI == "ECLI:NL:HR:1984:AC8252" and citation == "NJ 1982, 411") :
-                    #     print("hi")
-                    referenceFound = True
-                    row = [ECLI,ref_ECLI,citation,el.tail]
-                    if (future) :
-                        rows_f.append(row)
-                    else :
-                        rows.append(row)
+                    referenceFound = writeToRow(el.tail,future)
     return(referenceFound)
 
 def printErrorlist() :
@@ -143,12 +127,12 @@ try:
                                                     if (re.match(r"!?ECLI:.+:.+:\d\d\d\d:.+",ref_ECLI)) : # Check future references
                                                         ref_year = ref_ECLI.split(':')[3].split(':')[0]
                                                         if (int(ref_year) > int(year)) :
-                                                            writeToRows(ECLI,folder2 + ECLI_filename,citation,True)
+                                                            findReference(folder2 + ECLI_filename,True)
                                                             futureReference+=1
                                                     else : 
                                                         referenceError+=1 # Reference not in the right format
                                                     try :
-                                                        if not writeToRows(ECLI,folder2 + ECLI_filename,citation,False) : # There might be more occurences of citations in the text     
+                                                        if not findReference(folder2 + ECLI_filename,False) : # There might be more occurences of citations in the text     
                                                             #print(ECLI,citation)
                                                             missingReference+=1
                                                     except Exception as e :
@@ -169,6 +153,8 @@ try:
 except Exception as e :
     print(e) # Never reaches
 
+print(csvTotal)
+print(folder)
 if not os.path.exists(csvTotal) :
     writeToCSV(csvTotal,rows,fields)
 if not os.path.exists(csvFuture) :
