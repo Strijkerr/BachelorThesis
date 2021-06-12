@@ -26,7 +26,8 @@ csvFile = {
     "future": folder + "CSV/Future.csv",
     "empty_citations": folder + "CSV/EmptyC.csv",
     "empty_references": folder + "CSV/EmptyR.csv",
-    "missing_references": folder + "CSV/Missing.csv"
+    "missing_references": folder + "CSV/Missing.csv",
+    "reference_format_error": folder + "CSV/RefError.csv"
 }
 
 rows = {
@@ -34,7 +35,8 @@ rows = {
     "future": [],
     "empty_citations": [],
     "empty_references": [],
-    "missing_references": []
+    "missing_references": [],
+    "reference_format_error": []
 }
 
 def writeToCSV (csvDestination,rows) :
@@ -140,6 +142,7 @@ try:
                                                             futureReference+=1
                                                     else : 
                                                         referenceError+=1 # Reference not in the right format
+                                                        findReference(folder2 + ECLI_filename,"reference_format_error")
                                                     try :
                                                         if not findReference(folder2 + ECLI_filename,"total") : # There might be more occurences of citations in the text     
                                                             writeToRow("-","missing_references")
@@ -166,16 +169,6 @@ except Exception as e :
 for file in csvFile :
     if not os.path.exists(csvFile[file]) :
         writeToCSV(csvFile[file],rows[file])
-# if not os.path.exists(csvTotal) :
-#     writeToCSV(csvTotal,rows["total"])
-# if not os.path.exists(csvFuture) :
-#     writeToCSV(csvFuture,rows["future"])
-# if not os.path.exists(csvEmptyC) :
-#     writeToCSV(csvEmptyC,rows["empty_citations"])
-# if not os.path.exists(csvEmptyR) :
-#     writeToCSV(csvEmptyR,rows["empty_references"])
-# if not os.path.exists(csvMissing) :
-#     writeToCSV(csvMissing,rows["missing_references"])
 
 printStats()
 #printErrorlist()
