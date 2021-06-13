@@ -14,5 +14,4 @@ with open(file) as csv_file:
         print("ECLI: " + row[0])
         print("Ref_ECLI: " + row[1])
         print("Citation: '" + row[2] + "'")
-        print("Paragraph: '" + row[3] + "'")
-        print('\n')
+        print("Paragraph: '" + row[3] + "'" + '\n')
