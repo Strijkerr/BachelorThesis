@@ -13,6 +13,7 @@ emptyReference = 0
 futureReference = 0
 referenceError = 0
 missingReference = 0
+selfReference =0
 decisionList = []
 errorList = []
 
@@ -27,7 +28,8 @@ csvFile = {
     "empty_citations": folder + "CSV/EmptyC.csv",
     "empty_references": folder + "CSV/EmptyR.csv",
     "missing_references": folder + "CSV/Missing.csv",
-    "reference_format_error": folder + "CSV/RefError.csv"
+    "reference_format_error": folder + "CSV/RefError.csv",
+    "self_reference": folder + "CSV/SelfRef.csv"
 }
 
 rows = {
@@ -36,7 +38,8 @@ rows = {
     "empty_citations": [],
     "empty_references": [],
     "missing_references": [],
-    "reference_format_error": []
+    "reference_format_error": [],
+    "self_reference": []
 }
 
 def writeToCSV (csvDestination,rows) :
@@ -90,14 +93,15 @@ def printStats() :
     print("Empty citations: ", emptyCitation)
     print("Empty references: ", emptyReference)
     print("Future references: ", futureReference)
+    print("Self references: ", selfReference)
     print("Reference ECLI format errors: ", referenceError)
     print("Citationcount/anchor texts: ", citationCount)
     print("Row count total: ", len(rows["total"]))
     print("Rows future count total: ", len(rows["future"]))
     print("References not found: ", ((missingReference-emptyCitation)-emptyReference))
-    print("Length emptyC: ",len(rows["empty_citations"]))
-    print("Length emptyR: ",len(rows["empty_references"]))
-    print("Length missing: ",(len(rows["missing_references"])-len(rows["empty_references"])-len(rows["empty_citations"])))
+    # print("Length emptyC: ",len(rows["empty_citations"]))
+    # print("Length emptyR: ",len(rows["empty_references"]))
+    # print("Length missing: ",(len(rows["missing_references"])-len(rows["empty_references"])-len(rows["empty_citations"])))
 
 try:
     parser = etree.iterparse(folder + file, events=('start','end')) # Iterparse for parsing large xml files because large xml files don't fit into memory as a whole
@@ -135,7 +139,10 @@ try:
                                                     makeRow = False
                                                 if (makeRow) :
                                                     year = ECLI.split(':')[3]
-                                                    if (re.match(r"!?ECLI:.+:.+:\d\d\d\d:.+",ref_ECLI)) : # Check future references
+                                                    if (ECLI == ref_ECLI) :
+                                                        selfReference+=1
+                                                        findReference(folder2 + ECLI_filename,"self_reference")
+                                                    if (re.match(r"!?ECLI:.+:.+:\d\d\d\d:.+",ref_ECLI)) : # Check future references, also allows ECLIECLI formats
                                                         ref_year = ref_ECLI.split(':')[3].split(':')[0]
                                                         if (int(ref_year) > int(year)) :
                                                             findReference(folder2 + ECLI_filename,"future")
