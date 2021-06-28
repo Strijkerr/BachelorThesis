@@ -4,7 +4,9 @@ from tqdm import tqdm
 import requests
 import os
 import subprocess
+from datetime import date
 
+today = str(date.today())
 cwd = os.getcwd()
 folder = cwd + "/DataSets/OpenDataUitspraken"
 folder_zip = folder + '.zip'
@@ -14,7 +16,8 @@ def unzip () :
     var = input("Type 'yes' to unzip: ")
     if (var == 'yes') :
         print("Unzipping")
-        subprocess.call(['sh', cwd + '/SideScripts/unpack.sh',folder_zip])
+        subprocess.call(['unzip',folder_zip,'-d',folder])
+        #subprocess.call(['sh', cwd + '/SideScripts/unpack.sh',folder_zip])
     else :
         print("No action")
 
@@ -37,6 +40,8 @@ if not os.path.exists(folder) :
                 print("ERROR, something went wrong!")
             else :
                 print("Dataset succesfully downloaded!\n")
+                with open(cwd + "/DataSets/info.txt",'w') as f :
+                    f.write("Date of download 'OpenDataUitspraken': " + today + '\n')
                 unzip()
         else :
             print("No action")

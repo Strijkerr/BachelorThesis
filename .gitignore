@@ -132,6 +132,9 @@ dmypy.json
 DataSets/OpenDataUitspraken
 DataSets/OpenDataUitspraken.zip
 
+# Metadata datasets
+DataSets/info.txt
+
 # lidodata
 DataSets/lidodata
 
