@@ -8,4 +8,3 @@ rm -rf $foldername/2016/201601 # Removes random folder that is the only non-zipp
 rm $foldername/info.txt # Removes info.txt, this contains .
 find $foldername -name \*.zip -exec unzip -d $foldername {} \; # Unzips all zipped folders.
 rm -r $foldername/*/ # Removes all folders that contained the zipped folders.
-#After running this script, this script can be removed.

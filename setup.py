@@ -13,6 +13,10 @@ folder = cwd + "/DataSets/OpenDataUitspraken"
 folder_zip = folder + '.zip'
 url = "https://static.rechtspraak.nl/PI/OpenDataUitspraken.zip"
 
+if os.path.exists(cwd + "/DataSets/info.txt") :
+    with open(cwd + "/DataSets/info.txt",'r') as f :
+        print(f.read())
+
 def menu () :
     while True :
         if os.path.exists(folder_zip) :
@@ -24,11 +28,11 @@ def menu () :
         else :
             string2 = ''
         print("------------------------------------------------")
-        print("----------------------MENU----------------------")
+        print("----------------------SETUP MENU----------------------")
         print("------------------------------------------------\n")
         print("1. " + string1 + " Download 'OpenDataUitspraken.zip' (+~5.4GB needs to be available)")
         print("2. " + string2 + " Unzip and unpack 'OpenDataUitspraken.zip' (+~24GB needs to be available)")
-        print("3. Filter for court decisions with abstract/judgment in 'OpenDataUitspraken'")
+        print("3. Filter for court decisions with an abstract/judgment in 'OpenDataUitspraken'")
         print("4. Exit")
         var = input('\nEnter action: ')
         if (var == '1') :
@@ -68,7 +72,7 @@ def download () :
         else :
             print("Dataset succesfully downloaded!\n")
             with open(cwd + "/DataSets/info.txt",'w') as f :
-                f.write("Date of download 'OpenDataUitspraken': " + today + '\n')
+                f.write("Date of last download 'OpenDataUitspraken': " + today + '\n')
     else :
         print("'" + folder_zip + "' already exists, please delete first before redownloading.\n")
 menu()
