@@ -59,7 +59,7 @@ def unzip () :
 def download () :
     if not os.path.exists(folder_zip) :
         response = requests.get(url, stream=True)
-        total_size_in_bytes= int(response.headers.get('content-length', 0))
+        total_size_in_bytes= int(response.headers.get('content-length', 0)) # Misschien dit wegschrijven naar info.txt om te checken voor updates bij volgende download
         block_size = 1024 #1 Kibibyte
         progress_bar = tqdm(total=total_size_in_bytes, unit='iB', unit_scale=True)
         with open(folder_zip, 'wb') as file:
