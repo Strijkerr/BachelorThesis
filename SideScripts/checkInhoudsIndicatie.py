@@ -7,6 +7,10 @@ folder = "/media/jonathan/SSD/lido/OpenDataUitspraken"
 seconds = time.time()
 
 total = 0
+rdfCount = 0
+abstractCount = 0
+abstractCount2 = 0
+uitspraakCount = 0
 weluitspraak = 0
 weluitspraakwelinhood = 0
 weluitspraakgeeninhoud = 0
@@ -19,6 +23,16 @@ for file in os.listdir(folder) :
     xmlFile = open(folder + '/' + file, encoding="utf8")
     xml = BeautifulSoup(xmlFile, features="xml")
     xmlFile.close()
+    if (xml.RDF) :
+        rdfCount+=1
+    if (xml.uitspraak) :
+        uitspraakCount+=1
+    if (xml.inhoudsindicatie) :
+        abstractCount+=1
+        if (xml.inhoudsindicatie.getText()) :
+            abstractCount2+=1
+        else :
+            print(file)
     try :
         if (xml.uitspraak.getText()) :
             weluitspraak+=1
@@ -27,8 +41,6 @@ for file in os.listdir(folder) :
                     weluitspraakwelinhood+=1
             except :
                 weluitspraakgeeninhoud+=1
-        else :
-            print(xml.uitspraak.getText())
     except :
         geenuitspraak+=1
         try :
@@ -39,6 +51,10 @@ for file in os.listdir(folder) :
 
 
 print("Total files: ",total)
+print("RDF: ",rdfCount)
+print("abstractCount: ",abstractCount)
+print("abstractCount2: ",abstractCount2)
+print("uitspraakcount: ",uitspraakCount)
 print("weluitspraak: ",weluitspraak)
 print("weluitspraakwelinhood: ",weluitspraakwelinhood)
 print("weluitspraakgeeninhoud: ",weluitspraakgeeninhoud)
