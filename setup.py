@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# Source for download bar: https://stackoverflow.com/questions/37573483/progress-bar-while-download-file-over-http-with-requests
+# Source for download progress bar: https://stackoverflow.com/questions/37573483/progress-bar-while-download-file-over-http-with-requests
 # Manual source 'OpenDataUitspraken' dataset: https://www.rechtspraak.nl/Uitspraken/paginas/open-data.aspx
 from tqdm import tqdm
 import requests
@@ -20,18 +20,18 @@ if os.path.exists(cwd + "/DataSets/info.txt") :
 def menu () :
     while True :
         if os.path.exists(folder_zip) :
-            string1 = "(Done)"
+            string1 = "(Done) "
         else :
             string1 = ''
         if os.path.exists(folder) :
-            string2 = "(Done)"
+            string2 = "(Done) "
         else :
             string2 = ''
-        print("------------------------------------------------")
+        print("------------------------------------------------------")
         print("----------------------SETUP MENU----------------------")
-        print("------------------------------------------------\n")
-        print("1. " + string1 + " Download 'OpenDataUitspraken.zip' (+~5.4GB needs to be available)")
-        print("2. " + string2 + " Unzip and unpack 'OpenDataUitspraken.zip' (+~24GB needs to be available)")
+        print("------------------------------------------------------\n")
+        print("1. " + string1 + "Download 'OpenDataUitspraken.zip' (+~5.4GB needs to be available)")
+        print("2. " + string2 + "Unzip and unpack 'OpenDataUitspraken.zip' (+~24GB needs to be available)")
         print("3. Filter for court decisions with an abstract/judgment in 'OpenDataUitspraken'")
         print("4. Exit")
         var = input('\nEnter action: ')
