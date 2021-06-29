@@ -3,7 +3,8 @@ import time
 from bs4 import BeautifulSoup
 import os
 
-folder = "/media/jonathan/SSD/lido/OpenDataUitspraken"
+cwd = os.getcwd()
+folder = cwd + "/DataSets/OpenDataUitspraken"
 seconds = time.time()
 
 total = 0
@@ -48,7 +49,6 @@ for file in os.listdir(folder) :
                 geenuitspraakwelinhoud+=1
         except :
             geenuitspraakgeeninhoud+=1
-
 
 print("Total files: ",total)
 print("RDF: ",rdfCount)

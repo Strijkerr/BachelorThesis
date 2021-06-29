@@ -1,9 +1,11 @@
 #!/usr/bin/python3
-import sys
 import os
 import xml.etree.ElementTree as ET
 count = 0
-folder = sys.argv[1]
+
+cwd = os.getcwd()
+folder = cwd + "/DataSets/OpenDataUitspraken"
+
 for file in os.listdir(folder) :
     tree = ET.parse(folder + '/' + file)
     root = tree.getroot()
