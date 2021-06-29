@@ -20,15 +20,15 @@ def start () :
     if not (startingYear == defaultStart and endingYear == defaultEnd) :
         new_years = []
         for i in years :
-            I = int(i)
-            if (I >= startingYear and I <= endingYear) :
+            year = int(i)
+            if (year >= startingYear and year <= endingYear) :
                 new_years.append(i)
-            elif (I < startingYear) :
+            elif (year < startingYear) :
                 left+=1
             else :
                 right+=1
         years = new_years
-    printTotal(years,startingYear,endingYear,left,right)
+    printStats(years,startingYear,endingYear,left,right)
     plot(years)
 
 def setRange (min, max) :
@@ -60,7 +60,7 @@ def plot (years) :
     plt.hist(years, bins = years_bins)
     plt.show()
 
-def printTotal (years,startingYear,endingYear,left,right) :
+def printStats (years,startingYear,endingYear,left,right) :
     print("Result:\n---------")
     if (left > 0) :
         print("Court decisions not counted to the left of",startingYear,":",left) # Court decisions left of given range
