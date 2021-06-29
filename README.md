@@ -3,7 +3,7 @@ Code for bachelor thesis project 2020/2021 by Jonathan Strijker
 
 For more information about this project, see the full thesis at: "https://theses.liacs.nl/xxxxxxxxxxx"
 
-This project requires 3x??GB of free space.
+This project requires 29+36GB of free space.
 
 If running for the first time, git clone this project in your map of choice by typing this in the terminal:
 1. git clone "https://github.com/Kroonkurk/BachelorThesis.git"
