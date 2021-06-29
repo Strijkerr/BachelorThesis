@@ -57,7 +57,7 @@ def download_2 () :
 
 def filter () :
     if os.path.exists(folder) :
-        subprocess.call(['python3','Scripts/filterUitspraken.py'])
+        subprocess.call(['python3','Scripts/filterAbstractsJudgments.py'])
     else :
         print("'" + folder + "' does not exist yet, please download/unzip it first.\n")
 
@@ -85,7 +85,7 @@ def menu () :
             return    
 
 def overview () :
-    subprocess.call(['python3','Scripts/overviewAbstractsJudgements.py'])
+    subprocess.call(['python3','Scripts/overviewAbstractsJudgments.py'])
 
 def plotYears () :
     subprocess.call(['python3','Visualization/plotYears.py'])
