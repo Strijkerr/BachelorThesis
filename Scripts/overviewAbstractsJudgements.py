@@ -11,6 +11,7 @@ total = 0
 rdfCount = 0
 abstractCount = 0
 abstractCount2 = 0
+noabstract = 0
 uitspraakCount = 0
 weluitspraak = 0
 weluitspraakwelinhood = 0
@@ -40,13 +41,19 @@ for file in os.listdir(folder) :
             try :
                 if (xml.inhoudsindicatie.getText()) :
                     weluitspraakwelinhood+=1
+                else :
+                    weluitspraakgeeninhoud+=1 # For the "ECLI_NL_RBDHA_2016_2379.xml" exception
             except :
                 weluitspraakgeeninhoud+=1
+        else :
+            geenuitspraak+=1 # No cases in dataset of 28/05/2021
     except :
         geenuitspraak+=1
         try :
             if (xml.inhoudsindicatie.getText()) :
                 geenuitspraakwelinhoud+=1
+            else :
+                geenuitspraakgeeninhoud+=1 # No cases in dataset of 28/05/2021
         except :
             geenuitspraakgeeninhoud+=1
 

@@ -4,6 +4,7 @@
 from tqdm import tqdm
 import requests
 import os
+import time
 import subprocess
 from datetime import date
 
@@ -62,13 +63,17 @@ def subMenu () :
             print("-------------------------------------------------------\n")
             print("1. Get court decision count")
             print("2. Get folder size")
-            print("3. Overview abstracts and judgments (80 minutes ETA)")
+            print("3. Overview abstracts and judgments (90 minutes ETA)")
             print("4. Exit scripts")
             var = input('\nEnter action: ')
             if (var == '1') :
+                seconds = time.time()
                 getCount()
+                print("Seconds:",time.time()-seconds)
             elif (var == '2') :
+                seconds = time.time()
                 getSize()
+                print("Seconds:",time.time()-seconds)
             elif (var == '3') :
                 overview()
             elif (var == '4') :
