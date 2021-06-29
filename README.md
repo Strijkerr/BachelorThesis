@@ -26,8 +26,6 @@ Launch 'menu.py' from the working directory to go through the steps of setting u
 
 From the setup menu you can download the dataset by entering '1'. You can unzip and unpack it with '2'. And one can filter only the court decisions with an abstract and/or judgment by pressing '3'. After going through all steps, one can exit 'setup.py' by pressing '4'. 
 
-Estimated times: step 1: < 0.5 hours, step 2: < 2 hours and step 3: < 1 hours.
-
 5. 1
 
 6. 2
