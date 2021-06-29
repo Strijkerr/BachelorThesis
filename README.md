@@ -7,7 +7,7 @@ This project requires 29+36GB of free space.
 
 Several libraries might be needed to run everything, terminal should signal which ones are missing.
 
-For opening this project in Visual Studio Code or any other IDE with a file tracker, add '**/OpenDataUitspraken/**' to the 'watcher exclude' (too many files to track otherwise).
+For opening this project in Visual Studio Code or any other IDE with a file tracker, add '**/OpenDataUitspraken/**' to the 'watcher exclude' (too many files to track otherwise). Project was however still unstable running in Visual Studio Code.
 
 If running for the first time, git clone this project in your map of choice by typing this in the terminal:
 1. git clone "https://github.com/Kroonkurk/BachelorThesis.git"
