@@ -66,6 +66,9 @@ def menu () :
 def overview () :
     subprocess.call(['python3','Scripts/overviewAbstractsJudgements.py'])
 
+def plotYears () :
+    subprocess.call(['python3','Scripts/overviewAbstractsJudgements.py'])
+
 def setupMenu () :
     while True :
         print("------------------------------------------------------")
@@ -73,7 +76,7 @@ def setupMenu () :
         print("------------------------------------------------------\n")
         print("1. Download 'OpenDataUitspraken.zip' (+~5.4GB needs to be available)")
         print("2. Unzip and unpack 'OpenDataUitspraken.zip' (+~24GB needs to be available)")
-        print("3. Filter for court decisions with an abstract/judgment in 'OpenDataUitspraken'")
+        print("3. Filter for court decisions with an abstract/judgment in 'OpenDataUitspraken' (< 25 minutes ETA)")
         print("4. Exit setup")
         var = input('\nEnter action: ')
         if (var == '1') :
@@ -101,7 +104,10 @@ def subMenu () :
             print("1. Get court decision count (< 3 seconds ETA)")
             print("2. Get folder size (< 3 minutes ETA)")
             print("3. Overview abstracts and judgments (< 90 minutes ETA)")
-            print("4. Exit scripts")
+            print("4. Plot graph (court decisions against years)")
+            print("5. Plot graph (court decisions against courts)")
+            print("6. Plot graph (court decisions against areas of law)")
+            print("7. Exit scripts")
             var = input('\nEnter action: ')
             if (var == '1') :
                 seconds = timer(True)
@@ -115,7 +121,19 @@ def subMenu () :
                 seconds = timer(True)
                 overview()
                 print("Seconds:",time.time()-seconds)
-            elif (var == '4') :
+            elif (var == '5') :
+                seconds = timer(True)
+                print("No implementation yet")
+                print("Seconds:",time.time()-seconds)
+            elif (var == '5') :
+                seconds = timer(True)
+                print("No implementation yet")
+                print("Seconds:",time.time()-seconds)
+            elif (var == '6') :
+                seconds = timer(True)
+                print("No implementation yet")
+                print("Seconds:",time.time()-seconds)
+            elif (var == '7') :
                 print("Scripts ended.")
                 return     
     else :

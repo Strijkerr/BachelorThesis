@@ -3,7 +3,6 @@ import time
 from lxml import etree
 
 seconds = time.time()
-
 file = "lidodata"
 folder = "/home/jonathan/Desktop/"
 

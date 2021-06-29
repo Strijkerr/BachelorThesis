@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 import os
 import xml.etree.ElementTree as ET
-count = 0
 
+count = 0
 cwd = os.getcwd()
 folder = cwd + "/DataSets/OpenDataUitspraken"
 
