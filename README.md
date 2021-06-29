@@ -5,6 +5,8 @@ For more information about this project, see the full thesis at: "https://theses
 
 This project requires 29+36GB of free space.
 
+Several libraries might be needed to run everything, terminal should signal which ones are missing.
+
 For opening this project in Visual Studio Code or any other IDE with a file tracker, add '**/OpenDataUitspraken/**' to the 'watcher exclude' (too many files to track otherwise).
 
 If running for the first time, git clone this project in your map of choice by typing this in the terminal:
@@ -14,9 +16,9 @@ When the cloning is complete, go to the working directory 'BachelorThesis'.
 
 2. cd BachelorThesis 
 
-Launch 'setup.py' from the working directory to go through the steps of setting up the datasets. Launching can be done by typing the following in the terminal:
+Launch 'menu.py' from the working directory to go through the steps of setting up the datasets. Launching can be done by typing the following in the terminal:
 
-3. python3 setup.py
+3. python3 menu.py
 
 A setup menu should be visible in which you can download the datasets('1'), unzip&unpack('2') and filter('3') them. After going through all steps, one can exit 'setup.py' by pressing '4'. 
 
