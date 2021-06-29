@@ -12,10 +12,31 @@ today = str(date.today())
 cwd = os.getcwd()
 folder = cwd + "/DataSets/OpenDataUitspraken"
 folder_zip = folder + '.zip'
+LiDO_file = cwd + "/DataSets/lidodata"
 url = "https://static.rechtspraak.nl/PI/OpenDataUitspraken.zip"
 
-def download () :
+def download_1 () :
     if not os.path.exists(folder_zip) :
+        response = requests.get(url, stream=True)
+        total_size_in_bytes= int(response.headers.get('content-length', 0)) # Misschien dit wegschrijven naar info.txt om te checken voor updates bij volgende download
+        block_size = 1024 #1 Kibibyte
+        progress_bar = tqdm(total=total_size_in_bytes, unit='iB', unit_scale=True)
+        with open(folder_zip, 'wb') as file:
+            for data in response.iter_content(block_size):
+                progress_bar.update(len(data))
+                file.write(data)
+        progress_bar.close()
+        if total_size_in_bytes != 0 and progress_bar.n != total_size_in_bytes:
+            print("ERROR, something went wrong!")
+        else :
+            print("Dataset succesfully downloaded!\n")
+            with open(cwd + "/DataSets/info.txt",'w') as f :
+                f.write("Date of last download 'OpenDataUitspraken': " + today + '\n')
+    else :
+        print("'" + folder_zip + "' already exists, please delete first before redownloading.\n")
+
+def download_2 () :
+    if not os.path.exists(LiDO_file) :
         response = requests.get(url, stream=True)
         total_size_in_bytes= int(response.headers.get('content-length', 0)) # Misschien dit wegschrijven naar info.txt om te checken voor updates bij volgende download
         block_size = 1024 #1 Kibibyte
@@ -67,7 +88,7 @@ def overview () :
     subprocess.call(['python3','Scripts/overviewAbstractsJudgements.py'])
 
 def plotYears () :
-    subprocess.call(['python3','Scripts/overviewAbstractsJudgements.py'])
+    subprocess.call(['python3','Visualization/plotYears.py'])
 
 def setupMenu () :
     while True :
@@ -81,7 +102,7 @@ def setupMenu () :
         var = input('\nEnter action: ')
         if (var == '1') :
             seconds = timer(False)
-            download()
+            download_1()
             print("Seconds:",time.time()-seconds)
         elif (var == '2') :
             seconds = timer(False)
