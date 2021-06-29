@@ -7,7 +7,7 @@ This project requires 29+36GB of free space.
 
 Several libraries might be needed to run everything, terminal should signal which ones might be missing.
 
-For opening this project in Visual Studio Code or any other IDE with a file tracker, add '**/OpenDataUitspraken/**' to the 'watcher exclude' (too many files to track otherwise). Project was however sometimes still unstable running in Visual Studio Code. 
+For opening this project in Visual Studio Code or any other IDE with a file tracker, add '**/OpenDataUitspraken/**' to the 'watcher exclude' (too many files to track otherwise). However, project sometimes still unstable in Visual Studio Code if the 'OpenDataUitspraken' dataset has not yet been slimmed down. 
 
 (TIP: if emptying the trash through UI linux is not working because of too many files in the trash, try 'trash-empty' command in terminal using trash-cli (sudo apt install trash-cli) library)
 
@@ -40,7 +40,7 @@ One can then go to the edit 'OpenDataUitspraken' menu by pressing '2' in the mai
 
 8. 2
 
-From the edit menu, one can remove the court decisions that are without abstract and without judgment from the dataset. Then one can go back to the main menu by pressing '2'.
+From the edit menu, one can remove the court decisions that are without abstract and without judgment from the dataset. One can go back to the main menu by pressing '2'.
 
 9. 1
 
@@ -52,7 +52,7 @@ From the main menu, one can choose to open the 'OpendataUitspraken' tools to use
 
 From this menu, one can use tools to see certain characteristics about the dataset.
 
-At this point, the datasets should be ready for visualization & analysis
+<!-- At this point, the datasets should be ready for visualization & analysis -->
 
 One can end the program by pressing '4' in the main menu.
 
