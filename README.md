@@ -5,6 +5,8 @@ For more information about this project, see the full thesis at: "https://theses
 
 This project requires 29+36GB of free space.
 
+For opening this project in Visual Studio Code or any other IDE with a file tracker, add '**/OpenDataUitspraken/**' to the 'watcher exclude' (too many files to track otherwise).
+
 If running for the first time, git clone this project in your map of choice by typing this in the terminal:
 1. git clone "https://github.com/Kroonkurk/BachelorThesis.git"
 

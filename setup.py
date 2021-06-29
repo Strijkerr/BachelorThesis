@@ -20,13 +20,29 @@ if os.path.exists(cwd + "/DataSets/info.txt") :
 def menu () :
     while True :
         print("------------------------------------------------------")
+        print("----------------------MAIN MENU----------------------")
+        print("------------------------------------------------------\n")
+        print("1. Activate setup menu")
+        print("2. Open 'OpenDataUitspraken' menu")
+        print("3. Exit")
+        var = input('\nEnter action: ')
+        if (var == '1') :
+            setupMenu()
+        elif (var == '2') :
+            subMenu()
+        elif (var == '3') :
+            print("Program ended.")
+            return    
+
+def setupMenu () :
+    while True :
+        print("------------------------------------------------------")
         print("----------------------SETUP MENU----------------------")
         print("------------------------------------------------------\n")
         print("1. Download 'OpenDataUitspraken.zip' (+~5.4GB needs to be available)")
         print("2. Unzip and unpack 'OpenDataUitspraken.zip' (+~24GB needs to be available)")
         print("3. Filter for court decisions with an abstract/judgment in 'OpenDataUitspraken'")
-        print("4. Activate script menu'")
-        print("5. Exit")
+        print("4. Exit setup")
         var = input('\nEnter action: ')
         if (var == '1') :
             download()
@@ -35,36 +51,47 @@ def menu () :
         elif (var == '3') :
             filter()
         elif (var == '4') :
-            subMenu()
-        elif (var == '5') :
             print("Setup ended.")
             return     
 
 def subMenu () :
-    while True :
-        print("------------------------------------------------------")
-        print("----------------------SCRIPT MENU---------------------")
-        print("------------------------------------------------------\n")
-        print("1. Overview abstracts and judgments")
-        print("2. Exit")
-        var = input('\nEnter action: ')
-        if (var == '1') :
-            overview()
-        elif (var == '2') :
-            return     
-
-def overview () :
     if os.path.exists(folder) :
-        subprocess.call(['python3','Scripts/overviewAbstractsJudgements.py'])
+        while True :
+            print("-------------------------------------------------------")
+            print("---------------OpenDataUitspraken SCRIPTS--------------")
+            print("-------------------------------------------------------\n")
+            print("1. Get court decision count")
+            print("2. Get folder size")
+            print("3. Overview abstracts and judgments (80 minutes ETA)")
+            print("4. Exit scripts")
+            var = input('\nEnter action: ')
+            if (var == '1') :
+                getCount()
+            elif (var == '2') :
+                getSize()
+            elif (var == '3') :
+                overview()
+            elif (var == '4') :
+                print("Scripts ended.")
+                return     
     else :
         print("'" + folder + "' does not exist yet, please download/unzip it first.\n")
+        return
+
+def getSize () :
+    subprocess.call(['sh', cwd + '/Scripts/countSize.sh',folder])
+
+def getCount () :
+    subprocess.call(['sh', cwd + '/Scripts/countFiles.sh',folder])
+
+def overview () :
+    subprocess.call(['python3','Scripts/overviewAbstractsJudgements.py'])
 
 def filter () :
     if os.path.exists(folder) :
         subprocess.call(['python3','filterUitspraken.py'])
     else :
         print("'" + folder + "' does not exist yet, please download/unzip it first.\n")
-
 
 def unzip () :
     if not os.path.exists(folder_zip) :
