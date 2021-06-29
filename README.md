@@ -5,7 +5,7 @@ For more information about this project, see the full thesis at: "https://theses
 
 This project requires 29+36GB of free space.
 
-Several libraries might be needed to run everything, terminal should signal which ones are missing.
+Several libraries might be needed to run everything, terminal should signal which ones might be missing.
 
 For opening this project in Visual Studio Code or any other IDE with a file tracker, add '**/OpenDataUitspraken/**' to the 'watcher exclude' (too many files to track otherwise). Project was however sometimes still unstable running in Visual Studio Code. 
 
@@ -26,7 +26,9 @@ Launch 'menu.py' from the working directory to go through the steps of setting u
 
 4. 1
 
-From the setup menu you can download the dataset by entering '1'. You can unzip and unpack it with '2'. And one can filter only the court decisions with an abstract and/or judgment by pressing '3'. After going through all steps, one can exit the 'setup menu' by pressing '4'. 
+From the setup menu you can download the dataset by entering '1'. You can unzip and unpack it with '2'. 
+
+After going through these steps, one can exit the 'setup menu' by pressing '3'. 
 
 5. 1
 
@@ -34,8 +36,24 @@ From the setup menu you can download the dataset by entering '1'. You can unzip 
 
 7. 3
 
-8. 4
+One can then go to the edit 'OpenDataUitspraken' menu by pressing '2' in the main menu.
+
+8. 2
+
+From the edit menu, one can remove the court decisions that are without abstract and without judgment from the dataset. Then one can go back to the main menu by pressing '2'.
+
+9. 1
+
+10. 2
+
+From the main menu, one can choose to open the 'OpendataUitspraken' tools to use certain tools on the dataset.
+
+11. 3
+
+From this menu, one can use tools to see certain characteristics about the dataset.
 
 At this point, the datasets should be ready for visualization & analysis
 
-From the main menu, one can choose to open the 'OpendataUitspraken' menu to run scripts on that dataset, or one 
+One can end the program by pressing '4' in the main menu.
+
+12. 4

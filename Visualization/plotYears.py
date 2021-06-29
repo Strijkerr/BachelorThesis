@@ -67,7 +67,7 @@ def printStats (years,startingYear,endingYear,left,right) :
     print("Court decisions from",startingYear,"to",endingYear,":",len(years)) # Court decisions in given range
     if (right > 0) :
         print("Court decisions not counted to the right of",endingYear,":",right) # Court decisions to the right of given range
-    var = input("Print frequencies per year, type 'yes': ")
+    var = input("To also print frequencies per year type 'yes': ")
     if (var == 'yes') :
         print(Counter(years))
 

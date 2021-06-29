@@ -64,24 +64,39 @@ def filter () :
 def getCount () :
     subprocess.call(['sh', cwd + '/Scripts/countFiles.sh',folder])
 
-def getSize () :
-    subprocess.call(['sh', cwd + '/Scripts/countSize.sh',folder])
-
 def menu () :
     while True :
         print("------------------------------------------------------")
         print("----------------------MAIN MENU----------------------")
         print("------------------------------------------------------\n")
         print("1. Activate setup menu")
-        print("2. Open 'OpenDataUitspraken' menu")
-        print("3. Exit")
+        print("2. Edit 'OpenDataUitspraken'")
+        print("3. Tools 'OpenDataUitspraken'")
+        print("4. Exit")
         var = input('\nEnter action: ')
         if (var == '1') :
             setupMenu()
         elif (var == '2') :
-            subMenu()
+            editMenu()
         elif (var == '3') :
+            subMenu()
+        elif (var == '4') :
             print("Program ended.")
+            return    
+
+def editMenu () :
+     while True :
+        print("------------------------------------------------------")
+        print("---------------EDIT 'OpenDataUitspraken'--------------")
+        print("------------------------------------------------------\n")
+        print("1. Remove all court decisions that have no abstract and no judgment from 'OpenDataUitspraken' (< 25 minutes ETA)")
+        print("2. Exit")
+        var = input('\nEnter action: ')
+        if (var == '1') :
+            seconds = timer(False)
+            filter()
+            print("Seconds:",time.time()-seconds)
+        elif (var == '2') :
             return    
 
 def overview () :
@@ -97,8 +112,7 @@ def setupMenu () :
         print("------------------------------------------------------\n")
         print("1. Download 'OpenDataUitspraken.zip' (+~5.4GB needs to be available)")
         print("2. Unzip and unpack 'OpenDataUitspraken.zip' (+~24GB needs to be available)")
-        print("3. Filter for court decisions with an abstract/judgment in 'OpenDataUitspraken' (< 25 minutes ETA)")
-        print("4. Exit setup")
+        print("3. Exit setup")
         var = input('\nEnter action: ')
         if (var == '1') :
             seconds = timer(False)
@@ -109,26 +123,20 @@ def setupMenu () :
             unzip()
             print("Seconds:",time.time()-seconds)
         elif (var == '3') :
-            seconds = timer(False)
-            filter()
-            print("Seconds:",time.time()-seconds)
-        elif (var == '4') :
-            print("Setup ended.")
             return     
 
 def subMenu () :
     if os.path.exists(folder) :
         while True :
             print("-------------------------------------------------------")
-            print("---------------OpenDataUitspraken SCRIPTS--------------")
+            print("---------------Tools 'OpenDataUitspraken'--------------")
             print("-------------------------------------------------------\n")
-            print("1. Get court decision count (< 3 seconds ETA)")
-            print("2. Get folder size (< 3 minutes ETA)")
-            print("3. Overview abstracts and judgments (< 90 minutes ETA)")
-            print("4. Plot graph (court decisions against years) (< 5 seconds, exit figure to continue)")
-            print("5. Plot graph (court decisions against courts)")
-            print("6. Plot graph (court decisions against areas of law)")
-            print("7. Exit scripts")
+            print("1. Get court-decision count (< 3 seconds ETA)")
+            print("2. Overview existence of abstracts and judgments in dataset (< 90 minutes ETA)")
+            print("3. Plot graph (court decisions against years) (< 5 seconds, exit figure to continue)")
+            print("4. Plot graph (court decisions against courts)")
+            print("5. Plot graph (court decisions against areas of law)")
+            print("6. Exit scripts")
             var = input('\nEnter action: ')
             if (var == '1') :
                 seconds = timer(True)
@@ -136,25 +144,21 @@ def subMenu () :
                 print("Seconds:",time.time()-seconds)
             elif (var == '2') :
                 seconds = timer(True)
-                getSize()
+                overview()
                 print("Seconds:",time.time()-seconds)
             elif (var == '3') :
                 seconds = timer(True)
-                overview()
+                plotYears()
                 print("Seconds:",time.time()-seconds)
             elif (var == '4') :
                 seconds = timer(True)
-                plotYears()
+                print("No implementation yet")
                 print("Seconds:",time.time()-seconds)
             elif (var == '5') :
                 seconds = timer(True)
                 print("No implementation yet")
                 print("Seconds:",time.time()-seconds)
             elif (var == '6') :
-                seconds = timer(True)
-                print("No implementation yet")
-                print("Seconds:",time.time()-seconds)
-            elif (var == '7') :
                 print("Scripts ended.")
                 return     
     else :
