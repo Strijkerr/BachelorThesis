@@ -1,3 +1,3 @@
 #!/bin/sh
 # Telt het aantal files in een map
-ls -f $1 | wc -l
+ls -I '..' -I '.' -f $1 | wc -l
