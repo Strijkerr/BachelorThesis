@@ -107,11 +107,19 @@ def plotYears () :
 
 def setupMenu () :
     while True :
+        if os.path.exists(folder_zip) :
+            string1 = "(Done)"
+        else :
+            string1 = ''
+        if os.path.exists(folder) :
+            string2 = "(Done)"
+        else :
+            string2 = ''
         print("------------------------------------------------------")
         print("----------------------SETUP MENU----------------------")
         print("------------------------------------------------------\n")
-        print("1. Download 'OpenDataUitspraken.zip' (+~5.4GB needs to be available)")
-        print("2. Unzip and unpack 'OpenDataUitspraken.zip' (+~24GB needs to be available)")
+        print("1. " + string1 + " Download 'OpenDataUitspraken.zip' (+~5.4GB needs to be available)")
+        print("2. " + string2 + " Unzip and unpack 'OpenDataUitspraken.zip' (+~24GB needs to be available)")
         print("3. Exit setup")
         var = input('\nEnter action: ')
         if (var == '1') :
