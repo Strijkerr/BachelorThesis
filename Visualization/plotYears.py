@@ -1,34 +1,56 @@
 #!/usr/bin/python3
+from enum import EnumMeta
 import os
+import re
 import matplotlib.pyplot as plt
 from collections import Counter
 
-years = []
 cwd = os.getcwd()
 folder = cwd + "/DataSets/OpenDataUitspraken"
 
-for file in os.listdir(folder) : # Loop door elke file in de folder en stop het jaartal uit de titel in een list
-    years.append(file.split('_')[3])
+def start () :
+    years = []
+    left = 0
+    right = 0
+    for file in os.listdir(folder) : # Put the year from every filename in the folder into a list
+        years.append(file.split('_')[3])
+    defaultStart = int(min(years))
+    defaultEnd = int(max(years))
+    startingYear, endingYear = setRange(defaultStart,defaultEnd)
+    if not (startingYear == defaultStart and endingYear == defaultEnd) :
+        new_years = []
+        for i in years :
+            I = int(i)
+            if (I >= startingYear and I <= endingYear) :
+                new_years.append(i)
+            elif (I < startingYear) :
+                left+=1
+            else :
+                right+=1
+        years = new_years
+    printTotal(years,startingYear,endingYear,left,right)
+    plot(years)
 
-def menu () :
-    print("Please enter year range to plot. Default = ")
-    var = input('\nEnter action: ')
-    # Iets
-    # Also print frequencies in numbers?
+def setRange (min, max) :
+    print("Default range = " + str(min) + '-' + str(max))
+    var = input("\nEnter range (e.g. 1993-2021): ")
+    if (re.match(r"\d\d\d\d-\d\d\d\d",var)) :
+        startingYear = int(var.split('-')[0])
+        endingYear = int(var.split('-')[1])
+        if (startingYear <= endingYear) :
+            if (startingYear >= min and endingYear <= max) :
+                return(startingYear, endingYear)
+            else :
+                print("Input invalid, using default range")
+                return(min, max)
+        else :
+            print("Begin of range is larger than end of range, using default range")
+            return(min, max)
+    else :
+        print("Input invalid, using default range")
+        return(min, max)   
 
-def frequencies () :
-    temp = Counter(years) # Counter(years).most_common() # Sort most common
-    # Menu(1911,2021)
-    temp2 = dict(temp)
-    #print(temp2.items[:1])
-    #print(temp2) # Print frequencies of court decision per year
-    count = 0
-    for i in temp2 :
-        if (int(i) <= 1993) :
-            count+=temp2[i]
-    # print(count) # Court decisions, years 1911-1993
-
-def plot () :
+def plot (years) :
     years.sort() # Sort years ascending
     plt.xlabel("Year")
     plt.ylabel("Court decisions")
@@ -38,5 +60,15 @@ def plot () :
     plt.hist(years, bins = years_bins)
     plt.show()
 
-#plot()
-frequencies()
+def printTotal (years,startingYear,endingYear,left,right) :
+    print("Result:\n---------")
+    if (left > 0) :
+        print("Court decisions not counted to the left of",startingYear,":",left) # Court decisions left of given range
+    print("Court decisions from",startingYear,"to",endingYear,":",len(years)) # Court decisions in given range
+    if (right > 0) :
+        print("Court decisions not counted to the right of",endingYear,":",right) # Court decisions to the right of given range
+    var = input("Print frequencies per year, type 'yes': ")
+    if (var == 'yes') :
+        print(Counter(years))
+
+start()
