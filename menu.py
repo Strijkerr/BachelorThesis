@@ -125,7 +125,7 @@ def subMenu () :
             print("1. Get court decision count (< 3 seconds ETA)")
             print("2. Get folder size (< 3 minutes ETA)")
             print("3. Overview abstracts and judgments (< 90 minutes ETA)")
-            print("4. Plot graph (court decisions against years)")
+            print("4. Plot graph (court decisions against years) (< 5 seconds, exit figure to continue)")
             print("5. Plot graph (court decisions against courts)")
             print("6. Plot graph (court decisions against areas of law)")
             print("7. Exit scripts")
