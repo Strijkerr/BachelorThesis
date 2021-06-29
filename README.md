@@ -20,16 +20,22 @@ Launch 'menu.py' from the working directory to go through the steps of setting u
 
 3. python3 menu.py
 
-A setup menu should be visible in which you can download the datasets('1'), unzip&unpack('2') and filter('3') them. After going through all steps, one can exit 'setup.py' by pressing '4'. 
-
-Estimated times: step 1: < 0.5 hours, step 2: < 2 hours and step 3: < 1 hours.
+'1' Should be pressed to enter the setup menu.
 
 4. 1
 
-5. 2
+From the setup menu you can download the dataset by entering '1'. You can unzip and unpack it with '2'. And one can filter only the court decisions with an abstract and/or judgment by pressing '3'. After going through all steps, one can exit 'setup.py' by pressing '4'. 
 
-6. 3
+Estimated times: step 1: < 0.5 hours, step 2: < 2 hours and step 3: < 1 hours.
 
-7. 4
+5. 1
+
+6. 2
+
+7. 3
+
+8. 4
 
 At this point, the datasets should be ready for visualization & analysis
+
+From the main menu, one can choose to open the 'OpendataUitspraken' menu to run scripts on that dataset, or one 
