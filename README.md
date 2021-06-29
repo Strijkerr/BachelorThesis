@@ -24,7 +24,7 @@ Launch 'menu.py' from the working directory to go through the steps of setting u
 
 4. 1
 
-From the setup menu you can download the dataset by entering '1'. You can unzip and unpack it with '2'. And one can filter only the court decisions with an abstract and/or judgment by pressing '3'. After going through all steps, one can exit 'setup.py' by pressing '4'. 
+From the setup menu you can download the dataset by entering '1'. You can unzip and unpack it with '2'. And one can filter only the court decisions with an abstract and/or judgment by pressing '3'. After going through all steps, one can exit the 'setup menu' by pressing '4'. 
 
 5. 1
 
