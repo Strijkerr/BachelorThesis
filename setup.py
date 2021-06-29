@@ -55,7 +55,7 @@ def subMenu () :
 
 def overview () :
     if os.path.exists(folder) :
-        subprocess.call(['python3','overviewAbstractsJudgements.py'])
+        subprocess.call(['python3','Scripts/overviewAbstractsJudgements.py'])
     else :
         print("'" + folder + "' does not exist yet, please download/unzip it first.\n")
 
@@ -73,7 +73,7 @@ def unzip () :
         if not os.path.exists(folder) :
             print("Unzipping & unpacking")
             subprocess.call(['unzip',folder_zip,'-d',folder])
-            subprocess.call(['sh', cwd + '/SideScripts/unpack.sh',folder])
+            subprocess.call(['sh', cwd + '/Scripts/unpack.sh',folder])
         else :
             print("'" + folder + "' already exists, please delete first before redownloading.\n")
 
