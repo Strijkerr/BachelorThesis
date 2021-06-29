@@ -33,7 +33,7 @@ for file in os.listdir(folder) :
         if (xml.inhoudsindicatie.getText()) :
             abstractCount2+=1
         else :
-            print(file)
+            print("Error in file: " + file)
     try :
         if (xml.uitspraak.getText()) :
             weluitspraak+=1
@@ -51,14 +51,14 @@ for file in os.listdir(folder) :
             geenuitspraakgeeninhoud+=1
 
 print("Total files: ",total)
-print("RDF: ",rdfCount)
-print("abstractCount: ",abstractCount)
-print("abstractCount2: ",abstractCount2)
-print("uitspraakcount: ",uitspraakCount)
-print("weluitspraak: ",weluitspraak)
-print("weluitspraakwelinhood: ",weluitspraakwelinhood)
-print("weluitspraakgeeninhoud: ",weluitspraakgeeninhoud)
-print("geenuitspraak: ",geenuitspraak)
-print("geenuitspraakwelinhoud: ",geenuitspraakwelinhoud)
-print("geenuitspraakgeeninhoud: ",geenuitspraakgeeninhoud)
+print("Files with RDF: ",rdfCount)
+print("Files with abstract: ",abstractCount)
+print("Files with abstract *corrected: ",abstractCount2)
+print("Files with judgment: ",uitspraakCount)
+print("Files with judgment: ",weluitspraak)
+print("Judgment and abstract: ",weluitspraakwelinhood)
+print("Judgment, no abstract: ",weluitspraakgeeninhoud)
+print("No judgment: ",geenuitspraak)
+print("No judgment, abstract yes: ",geenuitspraakwelinhoud)
+print("No judgment and no abstract: ",geenuitspraakgeeninhoud)
 print("Seconds:",time.time()-seconds)
