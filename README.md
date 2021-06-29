@@ -7,7 +7,7 @@ This project requires 29+36GB of free space.
 
 Several libraries might be needed to run everything, terminal should signal which ones are missing.
 
-For opening this project in Visual Studio Code or any other IDE with a file tracker, add '**/OpenDataUitspraken/**' to the 'watcher exclude' (too many files to track otherwise).
+For opening this project in Visual Studio Code or any other IDE with a file tracker, add '**/OpenDataUitspraken/**' to the 'watcher exclude' (too many files to track otherwise). Project was however still unstable running in Visual Studio Code.
 
 If running for the first time, git clone this project in your map of choice by typing this in the terminal:
 1. git clone "https://github.com/Kroonkurk/BachelorThesis.git"
@@ -24,9 +24,7 @@ Launch 'menu.py' from the working directory to go through the steps of setting u
 
 4. 1
 
-From the setup menu you can download the dataset by entering '1'. You can unzip and unpack it with '2'. And one can filter only the court decisions with an abstract and/or judgment by pressing '3'. After going through all steps, one can exit 'setup.py' by pressing '4'. 
-
-Estimated times: step 1: < 0.5 hours, step 2: < 2 hours and step 3: < 1 hours.
+From the setup menu you can download the dataset by entering '1'. You can unzip and unpack it with '2'. And one can filter only the court decisions with an abstract and/or judgment by pressing '3'. After going through all steps, one can exit the 'setup menu' by pressing '4'. 
 
 5. 1
 
