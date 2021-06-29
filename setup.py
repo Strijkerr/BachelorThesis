@@ -19,31 +19,52 @@ if os.path.exists(cwd + "/DataSets/info.txt") :
 
 def menu () :
     while True :
-        if os.path.exists(folder_zip) :
-            string1 = "(Done) "
-        else :
-            string1 = ''
-        if os.path.exists(folder) :
-            string2 = "(Done) "
-        else :
-            string2 = ''
         print("------------------------------------------------------")
         print("----------------------SETUP MENU----------------------")
         print("------------------------------------------------------\n")
-        print("1. " + string1 + "Download 'OpenDataUitspraken.zip' (+~5.4GB needs to be available)")
-        print("2. " + string2 + "Unzip and unpack 'OpenDataUitspraken.zip' (+~24GB needs to be available)")
+        print("1. Download 'OpenDataUitspraken.zip' (+~5.4GB needs to be available)")
+        print("2. Unzip and unpack 'OpenDataUitspraken.zip' (+~24GB needs to be available)")
         print("3. Filter for court decisions with an abstract/judgment in 'OpenDataUitspraken'")
-        print("4. Exit")
+        print("4. Activate script menu'")
+        print("5. Exit")
         var = input('\nEnter action: ')
         if (var == '1') :
             download()
         elif (var == '2') :
             unzip()
         elif (var == '3') :
-            print("Not implemented yet.")
+            filter()
         elif (var == '4') :
+            subMenu()
+        elif (var == '5') :
             print("Setup ended.")
             return     
+
+def subMenu () :
+    while True :
+        print("------------------------------------------------------")
+        print("----------------------SCRIPT MENU---------------------")
+        print("------------------------------------------------------\n")
+        print("1. Overview abstracts and judgments")
+        print("2. Exit")
+        var = input('\nEnter action: ')
+        if (var == '1') :
+            overview()
+        elif (var == '2') :
+            return     
+
+def overview () :
+    if os.path.exists(folder) :
+        subprocess.call(['python3','overviewAbstractsJudgements.py'])
+    else :
+        print("'" + folder + "' does not exist yet, please download/unzip it first.\n")
+
+def filter () :
+    if os.path.exists(folder) :
+        subprocess.call(['python3','filterUitspraken.py'])
+    else :
+        print("'" + folder + "' does not exist yet, please download/unzip it first.\n")
+
 
 def unzip () :
     if not os.path.exists(folder_zip) :
