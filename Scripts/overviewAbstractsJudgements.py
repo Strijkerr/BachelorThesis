@@ -1,11 +1,9 @@
 #!/usr/bin/python3
-import time
 from bs4 import BeautifulSoup
 import os
 
 cwd = os.getcwd()
 folder = cwd + "/DataSets/OpenDataUitspraken"
-seconds = time.time()
 
 total = 0
 rdfCount = 0
@@ -68,4 +66,3 @@ print("Judgment, no abstract: ",weluitspraakgeeninhoud)
 print("No judgment: ",geenuitspraak)
 print("No judgment, abstract yes: ",geenuitspraakwelinhoud)
 print("No judgment and no abstract: ",geenuitspraakgeeninhoud)
-print("Seconds:",time.time()-seconds)

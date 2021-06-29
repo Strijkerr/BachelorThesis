@@ -61,27 +61,35 @@ def subMenu () :
             print("-------------------------------------------------------")
             print("---------------OpenDataUitspraken SCRIPTS--------------")
             print("-------------------------------------------------------\n")
-            print("1. Get court decision count")
-            print("2. Get folder size")
-            print("3. Overview abstracts and judgments (90 minutes ETA)")
+            print("1. Get court decision count (< 3 seconds ETA)")
+            print("2. Get folder size (< 3 minutes ETA)")
+            print("3. Overview abstracts and judgments (< 90 minutes ETA)")
             print("4. Exit scripts")
             var = input('\nEnter action: ')
             if (var == '1') :
-                seconds = time.time()
+                seconds = timer()
                 getCount()
                 print("Seconds:",time.time()-seconds)
             elif (var == '2') :
-                seconds = time.time()
+                seconds = timer()
                 getSize()
                 print("Seconds:",time.time()-seconds)
             elif (var == '3') :
+                seconds = timer()
                 overview()
+                print("Seconds:",time.time()-seconds)
             elif (var == '4') :
                 print("Scripts ended.")
                 return     
     else :
         print("'" + folder + "' does not exist yet, please download/unzip it first.\n")
         return
+
+def timer () :
+    seconds = time.time()
+    print("Started: " + time.ctime(seconds))
+    print("Result:\n---------")
+    return seconds
 
 def getSize () :
     subprocess.call(['sh', cwd + '/Scripts/countSize.sh',folder])
