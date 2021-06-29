@@ -1,16 +1,16 @@
 #!/usr/bin/python3
-import sys
 import os
 import time
 from bs4 import BeautifulSoup
 from collections import Counter
 import matplotlib.pyplot as plt
 
-#folder = sys.argv[1]
-folder = "/home/jonathan/Desktop/OpenDataUitspraken"
+cwd = os.getcwd()
+folder = cwd + "/DataSets/OpenDataUitspraken"
 seconds = time.time()
 delimiter = "; "
 subjects_all = []
+
 for file in os.listdir(folder) :
     subjects = []
     xmlFile = open(folder + '/' + file, encoding="utf8")

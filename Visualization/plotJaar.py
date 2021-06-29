@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-import sys
 import os
 import matplotlib.pyplot as plt
 from collections import Counter
 
 years = []
-folder = sys.argv[1]
+cwd = os.getcwd()
+folder = cwd + "/DataSets/OpenDataUitspraken"
 
 for file in os.listdir(folder) : # Loop door elke file in de folder en stop het jaartal uit de titel in een list
     years.append(file.split('_')[3])

@@ -121,9 +121,9 @@ def subMenu () :
                 seconds = timer(True)
                 overview()
                 print("Seconds:",time.time()-seconds)
-            elif (var == '5') :
+            elif (var == '4') :
                 seconds = timer(True)
-                print("No implementation yet")
+                plotYears()
                 print("Seconds:",time.time()-seconds)
             elif (var == '5') :
                 seconds = timer(True)

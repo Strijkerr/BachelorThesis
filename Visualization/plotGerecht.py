@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 from collections import Counter
 
 codes = []
-folder = sys.argv[1]
+cwd = os.getcwd()
+folder = cwd + "/DataSets/OpenDataUitspraken"
 
 for file in os.listdir(folder) : # Loop door elke file in de folder en stop de gerechtscode uit de titel in een list
     codes.append(file.split('_')[2])
