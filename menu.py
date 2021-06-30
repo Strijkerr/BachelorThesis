@@ -141,7 +141,7 @@ def menu_tools () :
             var = input('\nEnter action: ')
             if (var == '1') :
                 seconds = timer(True)
-                subprocess.call(['sh', cwd + '/Scripts/countFiles.sh',OpenDataUitspraken])
+                subprocess.call(['sh', cwd + '/Scripts/Shell_scripts/countFiles.sh',OpenDataUitspraken])
                 print("Seconds:",time.time()-seconds)
             elif (var == '2') :
                 seconds = timer(True)
@@ -175,7 +175,7 @@ def unzip () :
         if not os.path.exists(OpenDataUitspraken) :
             print("Unzipping & unpacking")
             subprocess.call(['unzip',OpenDataUitspraken_zip,'-d',OpenDataUitspraken])
-            subprocess.call(['sh', cwd + '/Scripts/unpack.sh',OpenDataUitspraken])
+            subprocess.call(['sh', cwd + '/Scripts/Shell_scripts/unpack.sh',OpenDataUitspraken])
             os.remove(OpenDataUitspraken_zip)
             print("Unzipping & unpacking succesful, zip has been removed")
         else :
