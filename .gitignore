@@ -140,8 +140,8 @@ DataSets/lidodata
 DataSets/lidodata.gz
 
 # kan later weg
-DataSets/1OpenDataUitspraken
-DataSets/1OpenDataUitspraken_full
+DataSets/OpenDataUitspraken_100
+DataSets/OpenDataUitspraken_full
 CSV/Future.csv
 CSV/Total.csv
 CSV/EmptyC.csv
