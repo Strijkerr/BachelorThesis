@@ -90,7 +90,7 @@ def editMenu () :
         print("---------------EDIT 'OpenDataUitspraken'--------------")
         print("------------------------------------------------------\n")
         print("1. Remove all court decisions that have no abstract and no judgment from 'OpenDataUitspraken' (< 25 minutes ETA)")
-        print("2. Exit")
+        print("2. Exit to main menu")
         var = input('\nEnter action: ')
         if (var == '1') :
             seconds = timer(False)
@@ -120,7 +120,7 @@ def setupMenu () :
         print("------------------------------------------------------\n")
         print("1. " + string1 + " Download 'OpenDataUitspraken.zip' (+~5.4GB needs to be available)")
         print("2. " + string2 + " Unzip and unpack 'OpenDataUitspraken.zip' (+~24GB needs to be available)")
-        print("3. Exit setup")
+        print("3. Exit to main menu")
         var = input('\nEnter action: ')
         if (var == '1') :
             seconds = timer(False)
@@ -137,14 +137,14 @@ def subMenu () :
     if os.path.exists(folder) :
         while True :
             print("-------------------------------------------------------")
-            print("---------------Tools 'OpenDataUitspraken'--------------")
+            print("---------------TOOLS 'OpenDataUitspraken'--------------")
             print("-------------------------------------------------------\n")
             print("1. Get court-decision count (< 3 seconds ETA)")
             print("2. Overview existence of abstracts and judgments in dataset (< 90 minutes ETA)")
             print("3. Plot graph (court decisions against years) (< 5 seconds, exit figure to continue)")
             print("4. Plot graph (court decisions against courts)")
             print("5. Plot graph (court decisions against areas of law)")
-            print("6. Exit scripts")
+            print("6. Exit to main menu")
             var = input('\nEnter action: ')
             if (var == '1') :
                 seconds = timer(True)
