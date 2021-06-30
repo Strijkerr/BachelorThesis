@@ -28,15 +28,23 @@ def start () :
                 right+=1
         years = new_years
     printStats(years,startingYear,endingYear,left,right)
-    # for i in range(left) :
-    #     years.append(str(defaultStart) + '-' + str(startingYear-1))
-    # for i in range(right) :
-    #     years.append(str(endingYear+1) + '-' + str(defaultEnd))
+    if (left != 0) :
+        leftRange = str(defaultStart) + '-' + str(startingYear-1)
+        var = input("To show years left of range like '" + leftRange + "' in plot, type 'yes': ")
+        if (var == 'yes') :
+            for i in range(left) :
+                years.append(leftRange)
+    if (right != 0) :
+        rightRange = str(endingYear+1) + '-' + str(defaultEnd)
+        var = input("To show years right of range like '" + rightRange + "' in plot, type 'yes': ")
+        if (var == 'yes') :
+            for i in range(right) :
+                years.append(rightRange)
     plot(years)
 
 def setRange (min, max) :
     print("Default range = " + str(min) + '-' + str(max))
-    var = input("\nEnter range (e.g. 1993-2021): ")
+    var = input("\nEnter range (e.g. 1995-2021): ")
     if (re.match(r"\d\d\d\d-\d\d\d\d",var)) :
         startingYear = int(var.split('-')[0])
         endingYear = int(var.split('-')[1])
@@ -70,7 +78,7 @@ def printStats (years,startingYear,endingYear,left,right) :
     print("Court decisions from",startingYear,"to",endingYear,":",len(years)) # Court decisions in given range
     if (right > 0) :
         print("Court decisions not counted to the right of",endingYear,":",right) # Court decisions to the right of given range
-    var = input("To also print frequencies per year type 'yes': ")
+    var = input("\nTo also print frequencies per year type 'yes': ")
     if (var == 'yes') :
         print(Counter(years))
 
