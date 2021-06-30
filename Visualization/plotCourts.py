@@ -8,9 +8,11 @@ cwd = os.getcwd()
 folder = cwd + "/DataSets/OpenDataUitspraken"
 
 def combine (court_codes_dict) :
-    countRB = 0
-    countGH = 0
     deleteList = []
+    countRB = 0 # 'Rechtbanken'
+    countGH = 0 # 'Gerechtshoven'
+    countKT = 0 # 'Kantongerechten'
+    countAntillen = 0 # 'Instanties Nederlandse Antillen'
     for i in court_codes_dict :
         if (i[:2] == 'RB') :
             countRB+=court_codes_dict[i]
@@ -18,10 +20,19 @@ def combine (court_codes_dict) :
         elif (i[:2] == 'GH') :
             countGH+=court_codes_dict[i]
             deleteList.append(i)
+        elif (i[:2] == 'KT') :
+            countKT+=court_codes_dict[i]
+            deleteList.append(i)
+        elif (i[:4] != 'CRVB' and i[:3] != 'RVS' and i[:2] != 'HR' and i[:3] != 'PHR' and i[:3] != 'CBB') :
+            countAntillen+=court_codes_dict[i]
+            deleteList.append(i)
+
     for i in deleteList :
         del court_codes_dict[i]
     court_codes_dict['RB'] = countRB
     court_codes_dict['GH'] = countGH
+    court_codes_dict['KT'] = countKT # Dissolved
+    court_codes_dict['Antillen'] = countAntillen
     temp = Counter(court_codes_dict).most_common()
     return(dict(temp))
 
@@ -37,7 +48,7 @@ def start () :
         court_codes.append(file.split('_')[2])
     temp = Counter(court_codes).most_common() # Make from list a list of tuples with frequency count
     court_codes_dict = dict(temp) # Make it a dict so it is plotable
-    var = input("\nTo combine all 'RB' and 'GH' court decisions in their respective class together type 'yes': ")
+    var = input("\nTo combine all 'RB', 'GH', 'KT' and 'Antillen' court decisions in their respective class together type 'yes': ")
     if (var == 'yes') :
         court_codes_dict = combine(court_codes_dict)
     var = input("\nTo also print the frequencies in terminal type 'yes': ")
