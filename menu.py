@@ -155,17 +155,11 @@ def subMenu () :
                 overview()
                 print("Seconds:",time.time()-seconds)
             elif (var == '3') :
-                seconds = timer(True)
                 plotYears()
-                print("Seconds:",time.time()-seconds)
             elif (var == '4') :
-                seconds = timer(True)
                 print("No implementation yet")
-                print("Seconds:",time.time()-seconds)
             elif (var == '5') :
-                seconds = timer(True)
                 print("No implementation yet")
-                print("Seconds:",time.time()-seconds)
             elif (var == '6') :
                 print("Scripts ended.")
                 return     
