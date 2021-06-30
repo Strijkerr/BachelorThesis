@@ -102,6 +102,9 @@ def editMenu () :
 def overview () :
     subprocess.call(['python3','Scripts/overviewAbstractsJudgments.py'])
 
+def plotCourts () :
+    subprocess.call(['python3','Visualization/plotCourts.py'])
+
 def plotYears () :
     subprocess.call(['python3','Visualization/plotYears.py'])
 
@@ -141,9 +144,9 @@ def subMenu () :
             print("-------------------------------------------------------\n")
             print("1. Get court-decision count (< 3 seconds ETA)")
             print("2. Overview existence of abstracts and judgments in dataset (< 90 minutes ETA)")
-            print("3. Plot graph (court decisions against years) (< 5 seconds, exit figure to continue)")
-            print("4. Plot graph (court decisions against courts)")
-            print("5. Plot graph (court decisions against areas of law)")
+            print("3. Plot graph (court decisions against years) (exit figure to continue)")
+            print("4. Plot graph (court decisions against courts) (exit figure to continue)")
+            print("5. Plot graph (court decisions against areas of law) (exit figure to continue)")
             print("6. Exit to main menu")
             var = input('\nEnter action: ')
             if (var == '1') :
@@ -157,7 +160,7 @@ def subMenu () :
             elif (var == '3') :
                 plotYears()
             elif (var == '4') :
-                print("No implementation yet")
+                plotCourts()
             elif (var == '5') :
                 print("No implementation yet")
             elif (var == '6') :

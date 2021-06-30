@@ -3,38 +3,46 @@ import os
 import matplotlib.pyplot as plt
 from collections import Counter
 
-codes = []
+court_codes = []
 cwd = os.getcwd()
 folder = cwd + "/DataSets/OpenDataUitspraken"
 
-for file in os.listdir(folder) : # Loop door elke file in de folder en stop de gerechtscode uit de titel in een list
-    codes.append(file.split('_')[2])
+def combine (court_codes_dict) :
+    countRB = 0
+    countGH = 0
+    deleteList = []
+    for i in court_codes_dict :
+        if (i[:2] == 'RB') :
+            countRB+=court_codes_dict[i]
+            deleteList.append(i)
+        elif (i[:2] == 'GH') :
+            countGH+=court_codes_dict[i]
+            deleteList.append(i)
+    for i in deleteList :
+        del court_codes_dict[i]
+    court_codes_dict['RB'] = countRB
+    court_codes_dict['GH'] = countGH
+    temp = Counter(court_codes_dict).most_common()
+    return(dict(temp))
 
-temp = Counter(codes).most_common() # Maak van list een list of tuples met frequency count
-codes_dict = dict(temp) # Maak er een dict van zodat data 'plot-able' is
+def plot (court_codes_dict) :
+    plt.xlabel("Court code")
+    plt.ylabel("Court decisions")
+    plt.xticks(rotation=90)
+    plt.bar(court_codes_dict.keys(), court_codes_dict.values())
+    plt.show() # Print bar plot
 
-# ------------------------ Totaal van arresten bij rechtbanken en gerechtshoven -------------------------
-countRB = 0
-countGH = 0
-deleteList = []
-for i in codes_dict :
-    if (i[:2] == 'RB') :
-        countRB+=codes_dict[i]
-        deleteList.append(i)
-    elif (i[:2] == 'GH') :
-        countGH+=codes_dict[i]
-        deleteList.append(i)
-for i in deleteList :
-    del codes_dict[i]
-codes_dict['RB'] = countRB
-codes_dict['GH'] = countGH
-temp = Counter(codes_dict).most_common() # Maak van list een list of tuples met frequency count
-codes_dict = dict(temp)
-# -------------------------------------------------------------------------------------------------------
+def start () :
+    for file in os.listdir(folder) : # Loop door elke file in de folder en stop de gerechtscode uit de titel in een list
+        court_codes.append(file.split('_')[2])
+    temp = Counter(court_codes).most_common() # Make from list a list of tuples with frequency count
+    court_codes_dict = dict(temp) # Make it a dict so it is plotable
+    var = input("\nTo combine all 'RB' and 'GH' court decisions in their respective class together type 'yes': ")
+    if (var == 'yes') :
+        court_codes_dict = combine(court_codes_dict)
+    var = input("\nTo also print the frequencies in terminal type 'yes': ")
+    if (var == 'yes') :
+        print(court_codes_dict) # Print frequencies of court decisions per court
+    plot(court_codes_dict)
 
-plt.xlabel("Court code")
-plt.ylabel("Court decisions")
-plt.xticks(rotation=90)
-plt.bar(codes_dict.keys(), codes_dict.values())
-print(codes_dict) # Print dict met frequency arresten per gerechtscode
-plt.show() # Print bar plot
+start()
