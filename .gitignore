@@ -140,6 +140,7 @@ DataSets/lidodata
 DataSets/lidodata.gz
 
 # kan later weg
+DataSets/1OpenDataUitspraken.zip
 DataSets/1OpenDataUitspraken
 DataSets/finalDecisions
 CSV/Future.csv
