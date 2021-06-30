@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 # Source for download progress bar: https://stackoverflow.com/questions/37573483/progress-bar-while-download-file-over-http-with-requests
-# Manual source 'OpenDataUitspraken' dataset: https://www.rechtspraak.nl/Uitspraken/paginas/open-data.aspx
-# Manual source 'lidodata' dataset: https://data.overheid.nl/en/dataset/linked-data-overheid
+# Manual source 'OpenDataUitspraken.zip' dataset: https://www.rechtspraak.nl/Uitspraken/paginas/open-data.aspx
+# After a manual download, place the .zip file inside 'BachelorThesis/DataSets/' before continuing with this program
+# Manual source 'lidodata.gz' dataset: https://data.overheid.nl/en/dataset/linked-data-overheid
+# After a manual download, place the .gz file inside 'BachelorThesis/DataSets/' before continuing with this program
 from tqdm import tqdm
 import requests
 import os
@@ -47,6 +49,7 @@ def gzip () :
         if not os.path.exists(OpenDataUitspraken) :
             print("Unzipping")
             subprocess.call(['gzip','-d',lidodata_gz])
+            print("Unzipping succesful, gz file removed")
         else :
             print("'" + lidodata + "' already exists, please delete first before unzipping again.\n")
 
@@ -171,6 +174,7 @@ def unzip () :
             subprocess.call(['unzip',OpenDataUitspraken_zip,'-d',OpenDataUitspraken])
             subprocess.call(['sh', cwd + '/Scripts/unpack.sh',OpenDataUitspraken])
             os.remove(OpenDataUitspraken_zip)
+            print("Unzipping & unpacking succesful, zip has been removed")
         else :
             print("'" + OpenDataUitspraken + "' already exists, please delete first before unzipping again.\n")
 main()
