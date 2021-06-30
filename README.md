@@ -12,6 +12,7 @@ For opening this project in Visual Studio Code or any other IDE with a file trac
 TIP: the datasets used in this project contain > 2.8 million files. After deleting those after one is done using this project, emptying the trash folder through the user interface in linux might be buggy. Using the 'trash-empty' command in terminal from the trash-cli (sudo apt install trash-cli) library is a possible solution to this problem.
 
 **SETUP**
+
 If running for the first time, git clone this project in your map of choice by typing this in the terminal:
 1. git clone "https://github.com/Kroonkurk/BachelorThesis.git"
 
