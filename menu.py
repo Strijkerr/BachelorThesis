@@ -35,7 +35,7 @@ def download (url,zip) :
         else :
             print("Dataset succesfully downloaded!\n")
             with open(cwd + "/DataSets/info.txt",'a') as f :
-                f.write("Date of last download '" + zip + "': " + today + '\nBytes: ' + str(total_size_in_bytes))
+                f.write("Date of last download '" + zip + "': " + today + '\nBytes: ' + str(total_size_in_bytes) + '\n')
             f.close()
     else :
         print("'" + zip + "' already exists, please delete first before redownloading.\n")
