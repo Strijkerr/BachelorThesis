@@ -4,19 +4,19 @@ from bs4 import BeautifulSoup
 from collections import Counter
 import matplotlib.pyplot as plt
 
-cwd = os.getcwd()
-folder = cwd + "/DataSets/OpenDataUitspraken"
-delimiter = "; "
-subjects_all = []
-
+# Print bar plot
 def plot (subject_dict) :
     plt.xlabel("Rechtsgebieden")
     plt.ylabel("Arresten")
     plt.xticks(rotation=90)
     plt.bar(subject_dict.keys(), subject_dict.values())
-    plt.show() # Print bar plot
+    plt.show() 
 
+# main
 def main () :
+    folder = os.getcwd() + "/DataSets/OpenDataUitspraken"
+    delimiter = "; "
+    subjects_all = []
     for file in os.listdir(folder) :
         subjects = []
         xmlFile = open(folder + '/' + file, encoding="utf8")
