@@ -17,18 +17,18 @@ selfReference =0
 decisionList = []
 errorList = []
 
-file = "DataSets/lidodata"
-folder = os.getcwd() + '/'
-folder2 = folder + "DataSets/OpenDataUitspraken/" # Uitkijken, als je de map als argument meegeeft aan de functie, dan geef je die meestal mee zonder / op het einde
+lidodata = "DataSets/lidodata"
+BachelorThesis = os.getcwd() + '/'
+OpenDataUitspraken = BachelorThesis + "DataSets/OpenDataUitspraken/" # Uitkijken, als je de map als argument meegeeft aan de functie, dan geef je die meestal mee zonder / op het einde
 
 csvFile = {
-    "total": folder + "CSV/Total.csv",
-    "future": folder + "CSV/Future.csv",
-    "empty_citations": folder + "CSV/EmptyC.csv",
-    "empty_references": folder + "CSV/EmptyR.csv",
-    "missing_references": folder + "CSV/Missing.csv",
-    "reference_format_error": folder + "CSV/RefError.csv",
-    "self_reference": folder + "CSV/SelfRef.csv"
+    "total": BachelorThesis + "CSV/Total.csv",
+    "future": BachelorThesis + "CSV/Future.csv",
+    "empty_citations": BachelorThesis + "CSV/EmptyC.csv",
+    "empty_references": BachelorThesis + "CSV/EmptyR.csv",
+    "missing_references": BachelorThesis + "CSV/Missing.csv",
+    "reference_format_error": BachelorThesis + "CSV/RefError.csv",
+    "self_reference": BachelorThesis + "CSV/SelfRef.csv"
 }
 
 rows = {
@@ -57,8 +57,8 @@ def findReference(file,row_type) :
     referenceFound = False
     parser2 = etree.parse(file)
     root = parser2.getroot()
-    abstract = root.find("{http://www.rechtspraak.nl/schema/rechtspraak-1.0}inhoudsindicatie") # Always only one abstract section in court decision.
-    decision = root.find("{http://www.rechtspraak.nl/schema/rechtspraak-1.0}uitspraak") # Always only one 'uitspraak' section in court decision.
+    abstract = root.find("{http://www.rechtspraak.nl/schema/rechtspraak-1.0}inhoudsindicatie") # Max = one abstract section in court decision
+    decision = root.find("{http://www.rechtspraak.nl/schema/rechtspraak-1.0}uitspraak") # Max = one 'uitspraak' section in court decision
 
     if (abstract is not None) :
         for el in abstract.iter():
@@ -103,7 +103,7 @@ def printStats() :
     # print("Length missing: ",(len(rows["missing_references"])-len(rows["empty_references"])-len(rows["empty_citations"])))
 
 try:
-    parser = etree.iterparse(folder + file, events=('start','end')) # Iterparse for parsing large xml files because large xml files don't fit into memory as a whole
+    parser = etree.iterparse(BachelorThesis + lidodata, events=('start','end')) # Iterparse for parsing large xml files because large xml files don't fit into memory as a whole
     try:
         for event, element in parser:
             about = element.get('{http://www.w3.org/1999/02/22-rdf-syntax-ns#}about') # The 'about' attribute represents the content of the node
@@ -118,7 +118,7 @@ try:
                         for ref in citations :
                             if (ref.text != None and "target=ecli" in ref.text) : # We only want rulings that contain ECLI references
                                 try :
-                                    if os.path.exists(folder2 + ECLI_filename) : # Check if the LiDO legal rulings with > 0 references to other rulings are in the rechtspraak.nl dataset
+                                    if os.path.exists(OpenDataUitspraken + ECLI_filename) : # Check if the LiDO legal rulings with > 0 references to other rulings are in the rechtspraak.nl dataset
                                         try :
                                             citation = ref.text.split("opschrift=")[1]
                                             citationCount+=1
@@ -134,23 +134,23 @@ try:
                                                     makeRow = False
                                                 if (ref_ECLI == "!" or ref_ECLI == '\n' or ref_ECLI == '') : # We only want references that refer to something
                                                     emptyReference+=1
-                                                    findReference(folder2 + ECLI_filename,"empty_references") # Als hij hem hierin niet vind, dan is het aantal rows niet gelijk aan #emptyReference
+                                                    findReference(OpenDataUitspraken + ECLI_filename,"empty_references") # Als hij hem hierin niet vind, dan is het aantal rows niet gelijk aan #emptyReference
                                                     makeRow = False
                                                 if (makeRow) :
                                                     year = ECLI.split(':')[3]
                                                     if (ECLI == ref_ECLI) :
                                                         selfReference+=1
-                                                        findReference(folder2 + ECLI_filename,"self_reference")
+                                                        findReference(OpenDataUitspraken + ECLI_filename,"self_reference")
                                                     if (re.match(r"!?ECLI:.+:.+:\d\d\d\d:.+",ref_ECLI)) : # Check future references, also allows ECLIECLI formats
                                                         ref_year = ref_ECLI.split(':')[3].split(':')[0]
                                                         if (int(ref_year) > int(year)) :
-                                                            findReference(folder2 + ECLI_filename,"future")
+                                                            findReference(OpenDataUitspraken + ECLI_filename,"future")
                                                             futureReference+=1
                                                     else : 
                                                         referenceError+=1 # Reference not in the right format
-                                                        findReference(folder2 + ECLI_filename,"reference_format_error")
+                                                        findReference(OpenDataUitspraken + ECLI_filename,"reference_format_error")
                                                     try :
-                                                        if not findReference(folder2 + ECLI_filename,"total") : # There might be more occurences of citations in the text     
+                                                        if not findReference(OpenDataUitspraken + ECLI_filename,"total") : # There might be more occurences of citations in the text     
                                                             writeToRow("-","missing_references")
                                                             missingReference+=1
                                                     except Exception as e :
