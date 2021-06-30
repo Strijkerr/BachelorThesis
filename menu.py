@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # Source for download progress bar: https://stackoverflow.com/questions/37573483/progress-bar-while-download-file-over-http-with-requests
 # Manual source 'OpenDataUitspraken' dataset: https://www.rechtspraak.nl/Uitspraken/paginas/open-data.aspx
+# Manual source 'lidodata' dataset: https://data.overheid.nl/en/dataset/linked-data-overheid
 from tqdm import tqdm
 import requests
 import os
@@ -20,7 +21,7 @@ def download (url,zip) :
     today = str(date.today())
     if not os.path.exists(zip) :
         response = requests.get(url, stream=True)
-        total_size_in_bytes= int(response.headers.get('content-length', 0)) # Misschien dit wegschrijven naar info.txt om te checken voor updates bij volgende download
+        total_size_in_bytes= int(response.headers.get('content-length', 0))
         print(total_size_in_bytes)
         block_size = 1024 #1 Kibibyte
         progress_bar = tqdm(total=total_size_in_bytes, unit='iB', unit_scale=True)
@@ -34,7 +35,7 @@ def download (url,zip) :
         else :
             print("Dataset succesfully downloaded!\n")
             with open(cwd + "/DataSets/info.txt",'a') as f :
-                f.write("Date of last download " + zip + ": " + today + '\nBytes: ' + str(total_size_in_bytes))
+                f.write("Date of last download '" + zip + "': " + today + '\nBytes: ' + str(total_size_in_bytes))
             f.close()
     else :
         print("'" + zip + "' already exists, please delete first before redownloading.\n")
@@ -96,7 +97,7 @@ def menu_setup () :
         print("------------------------------------------------------")
         print("----------------------SETUP MENU----------------------")
         print("------------------------------------------------------\n")
-        print("1. Download 'OpenDataUitspraken.zip' (+~5.4GB needs to be available)")
+        print("1. Download 'OpenDataUitspraken.zip' (+~5.4GB needs to be available) (ETA < 9 minutes)")
         print("2. Unzip and unpack 'OpenDataUitspraken.zip' (+~24GB needs to be available)")
         print("3. Download 'lidodata.gz' (+~1.4GB needs to be available)")
         print("4. Unzip and unpack 'OpenDataUitspraken.zip' (+~38.2GB needs to be available) (ETA < 11 minutes)")
@@ -169,7 +170,7 @@ def unzip () :
             print("Unzipping & unpacking")
             subprocess.call(['unzip',OpenDataUitspraken_zip,'-d',OpenDataUitspraken])
             subprocess.call(['sh', cwd + '/Scripts/unpack.sh',OpenDataUitspraken])
+            os.remove(OpenDataUitspraken_zip)
         else :
             print("'" + OpenDataUitspraken + "' already exists, please delete first before unzipping again.\n")
-
 menu()
