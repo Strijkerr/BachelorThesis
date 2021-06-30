@@ -98,7 +98,7 @@ def menu_setup () :
         print("----------------------SETUP MENU----------------------")
         print("------------------------------------------------------\n")
         print("1. Download 'OpenDataUitspraken.zip' (+~5.4GB needs to be available) (ETA < 9 minutes)")
-        print("2. Unzip and unpack 'OpenDataUitspraken.zip' (+~24GB needs to be available)")
+        print("2. Unzip and unpack 'OpenDataUitspraken.zip' (+~24GB needs to be available) (ETA < 37 minutes")
         print("3. Download 'lidodata.gz' (+~1.4GB needs to be available) (ETA < 7 minutes")
         print("4. Unzip and unpack 'OpenDataUitspraken.zip' (+~38.2GB needs to be available) (ETA < 11 minutes)")
         print("5. Exit to main menu")
@@ -170,7 +170,7 @@ def unzip () :
             print("Unzipping & unpacking")
             subprocess.call(['unzip',OpenDataUitspraken_zip,'-d',OpenDataUitspraken])
             subprocess.call(['sh', cwd + '/Scripts/unpack.sh',OpenDataUitspraken])
-            os.remove(OpenDataUitspraken_zip)
+            #os.remove(OpenDataUitspraken_zip) # Aanzetten in final release
         else :
             print("'" + OpenDataUitspraken + "' already exists, please delete first before unzipping again.\n")
 menu()
