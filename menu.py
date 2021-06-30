@@ -170,7 +170,7 @@ def unzip () :
             print("Unzipping & unpacking")
             subprocess.call(['unzip',OpenDataUitspraken_zip,'-d',OpenDataUitspraken])
             subprocess.call(['sh', cwd + '/Scripts/unpack.sh',OpenDataUitspraken])
-            #os.remove(OpenDataUitspraken_zip) # Aanzetten in final release
+            os.remove(OpenDataUitspraken_zip)
         else :
             print("'" + OpenDataUitspraken + "' already exists, please delete first before unzipping again.\n")
 main()
