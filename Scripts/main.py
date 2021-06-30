@@ -18,7 +18,6 @@ decisionList = []
 errorList = []
 
 file = "DataSets/lidodata"
-#file = "DataSets/finalDecisions"
 folder = os.getcwd() + '/'
 folder2 = folder + "DataSets/OpenDataUitspraken/" # Uitkijken, als je de map als argument meegeeft aan de functie, dan geef je die meestal mee zonder / op het einde
 
@@ -172,11 +171,10 @@ try:
 except Exception as e :
     print(e) # Never reaches
 
-
 for file in csvFile :
     if not os.path.exists(csvFile[file]) :
         writeToCSV(csvFile[file],rows[file])
 
 printStats()
-#printErrorlist()
+printErrorlist()
 print("Seconds:",time.time()-seconds)
