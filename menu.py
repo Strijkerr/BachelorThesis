@@ -161,7 +161,6 @@ def subMenu () :
             elif (var == '5') :
                 print("No implementation yet")
             elif (var == '6') :
-                print("Scripts ended.")
                 return     
     else :
         print("'" + folder + "' does not exist yet, please download/unzip it first.\n")
