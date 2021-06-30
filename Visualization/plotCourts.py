@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-import sys
 import os
 import matplotlib.pyplot as plt
 from collections import Counter
@@ -33,8 +32,8 @@ temp = Counter(codes_dict).most_common() # Maak van list een list of tuples met 
 codes_dict = dict(temp)
 # -------------------------------------------------------------------------------------------------------
 
-plt.xlabel("Gerechtscode")
-plt.ylabel("Arresten")
+plt.xlabel("Court code")
+plt.ylabel("Court decisions")
 plt.xticks(rotation=90)
 plt.bar(codes_dict.keys(), codes_dict.values())
 print(codes_dict) # Print dict met frequency arresten per gerechtscode

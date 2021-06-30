@@ -29,6 +29,10 @@ def start () :
                 right+=1
         years = new_years
     printStats(years,startingYear,endingYear,left,right)
+    # for i in range(left) :
+    #     years.append(str(defaultStart) + '-' + str(startingYear-1))
+    # for i in range(right) :
+    #     years.append(str(endingYear+1) + '-' + str(defaultEnd))
     plot(years)
 
 def setRange (min, max) :
@@ -44,7 +48,7 @@ def setRange (min, max) :
                 print("Input invalid, using default range")
                 return(min, max)
         else :
-            print("Begin of range is larger than end of range, using default range")
+            print("Start of range is larger than end of range, using default range")
             return(min, max)
     else :
         print("Input invalid, using default range")
