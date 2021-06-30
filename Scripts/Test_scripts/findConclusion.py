@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import os
 
 cwd = os.getcwd()
-folder = cwd + "/DataSets/1OpenDataUitspraken"
+folder = cwd + "/DataSets/OpenDataUitspraken_full"
 
 total = 0
 conclusieCount = 0
