@@ -3,10 +3,6 @@ import os
 import matplotlib.pyplot as plt
 from collections import Counter
 
-court_codes = []
-cwd = os.getcwd()
-folder = cwd + "/DataSets/OpenDataUitspraken"
-
 def combine (court_codes_dict) :
     deleteList = []
     countRB = 0 # 'Rechtbanken'
@@ -32,7 +28,9 @@ def plot (court_codes_dict) :
     plt.bar(court_codes_dict.keys(), court_codes_dict.values())
     plt.show() # Print bar plot
 
-def start () :
+def main () :
+    folder = os.getcwd() + "/DataSets/OpenDataUitspraken"
+    court_codes = []
     for file in os.listdir(folder) : # Loop door elke file in de folder en stop de gerechtscode uit de titel in een list
         court_codes.append(file.split('_')[2])
     temp = Counter(court_codes).most_common() # Make from list a list of tuples with frequency count
@@ -44,4 +42,5 @@ def start () :
     if (var == 'yes') :
         print(court_codes_dict) # Print frequencies of court decisions per court
     plot(court_codes_dict)
-start()
+
+main()
