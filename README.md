@@ -9,7 +9,7 @@ Several libraries might be needed to run everything, terminal should signal whic
 
 For opening this project in Visual Studio Code or any other IDE with a file tracker, add '**/OpenDataUitspraken/**' to the 'watcher exclude' (too many files to track otherwise). However, project sometimes still unstable in Visual Studio Code if the 'OpenDataUitspraken' dataset has not yet been slimmed down. 
 
-(TIP: if emptying the trash through UI linux is not working because of too many files in the trash, try 'trash-empty' command in terminal using trash-cli (sudo apt install trash-cli) library)
+TIP: the datasets used in this project contain > 2.8 million files. After deleting those after one is done using this project, emptying the trash folder through the user interface in linux might be buggy. Using the 'trash-empty' command in terminal from the trash-cli (sudo apt install trash-cli) library is a possible solution to this problem.
 
 If running for the first time, git clone this project in your map of choice by typing this in the terminal:
 1. git clone "https://github.com/Kroonkurk/BachelorThesis.git"
