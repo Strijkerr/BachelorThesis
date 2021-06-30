@@ -140,6 +140,7 @@ DataSets/lidodata
 DataSets/lidodata.gz
 
 # kan later weg
+DataSets/1OpenDataUitspraken
 DataSets/finalDecisions
 CSV/Future.csv
 CSV/Total.csv
@@ -148,4 +149,3 @@ CSV/EmptyR.csv
 CSV/Missing.csv
 CSV/RefError.csv
 CSV/SelfRef.csv
-menu.py
