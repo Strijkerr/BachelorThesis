@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-from enum
 import os
 import re
 import matplotlib.pyplot as plt
