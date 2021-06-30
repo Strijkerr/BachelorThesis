@@ -137,6 +137,7 @@ DataSets/info.txt
 
 # lidodata
 DataSets/lidodata
+DataSets/lidodata.gz
 
 # kan later weg
 DataSets/finalDecisions

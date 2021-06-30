@@ -3,7 +3,7 @@ Code for bachelor thesis project 2020/2021 by Jonathan Strijker
 
 For more information about this project, see the full thesis at: "https://theses.liacs.nl/xxxxxxxxxxx"
 
-This project requires 29+36GB of free space as it has to download big datasets from external sources.
+This project requires ~70GB of free space as it has to download big datasets from external sources.
 
 Several libraries might be needed to run everything, terminal should signal which ones might be missing.
 
