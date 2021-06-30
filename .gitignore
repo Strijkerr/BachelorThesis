@@ -140,9 +140,8 @@ DataSets/lidodata
 DataSets/lidodata.gz
 
 # kan later weg
-DataSets/1OpenDataUitspraken.zip
 DataSets/1OpenDataUitspraken
-DataSets/finalDecisions
+DataSets/1OpenDataUitspraken_full
 CSV/Future.csv
 CSV/Total.csv
 CSV/EmptyC.csv
