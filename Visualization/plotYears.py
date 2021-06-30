@@ -4,6 +4,7 @@ import re
 import matplotlib.pyplot as plt
 from collections import Counter
 
+# main
 def main () :
     folder = os.getcwd() + "/DataSets/OpenDataUitspraken"
     years = []
@@ -26,20 +27,10 @@ def main () :
                 right+=1
         years = temp_years
     printStats(years,start,end,left,right)
-    if (left != 0) :
-        leftRange = str(defaultStart) + '-' + str(start-1)
-        var = input("To show years left of range like '" + leftRange + "' in plot, type 'yes': ")
-        if (var == 'yes') :
-            for i in range(left) :
-                years.append(leftRange)
-    if (right != 0) :
-        rightRange = str(end+1) + '-' + str(defaultEnd)
-        var = input("To show years right of range like '" + rightRange + "' in plot, type 'yes': ")
-        if (var == 'yes') :
-            for i in range(right) :
-                years.append(rightRange)
+    years = showOutsideRange(years,start,end,left,right,defaultStart,defaultEnd)
     plot(years)
 
+# Sets range e.g., 1911-2021. Checks if format is correct etc.
 def setRange (min, max) :
     print("Default range = " + str(min) + '-' + str(max))
     var = input("\nEnter range (e.g. 1995-2021): ")
@@ -59,6 +50,22 @@ def setRange (min, max) :
         print("Input invalid, using default range")
         return(min, max)   
 
+def showOutsideRange (years,start,end,left,right,defaultStart,defaultEnd) :
+    if (left != 0) :
+        leftRange = str(defaultStart) + '-' + str(start-1)
+        var = input("To show years left of range like '" + leftRange + "' in plot, type 'yes': ")
+        if (var == 'yes') :
+            for i in range(left) :
+                years.append(leftRange)
+    if (right != 0) :
+        rightRange = str(end+1) + '-' + str(defaultEnd)
+        var = input("To show years right of range like '" + rightRange + "' in plot, type 'yes': ")
+        if (var == 'yes') :
+            for i in range(right) :
+                years.append(rightRange)
+    return(years)
+
+# Print bar plot
 def plot (years) :
     years.sort() # Sort years ascending
     plt.xlabel("Year")
@@ -69,6 +76,7 @@ def plot (years) :
     plt.hist(years, bins = years_bins)
     plt.show()
 
+# Print court decisions left and right of the requested range
 def printStats (years,start,end,left,right) :
     print("Result:\n---------")
     if (left > 0) :

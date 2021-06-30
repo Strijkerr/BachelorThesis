@@ -50,7 +50,7 @@ def gzip () :
         else :
             print("'" + lidodata + "' already exists, please delete first before unzipping again.\n")
 
-def menu () :
+def main () :
     if os.path.exists(cwd + "/DataSets/info.txt") :
         with open(cwd + "/DataSets/info.txt",'r') as f :
             print(f.read())
@@ -173,4 +173,4 @@ def unzip () :
             #os.remove(OpenDataUitspraken_zip) # Aanzetten in final release
         else :
             print("'" + OpenDataUitspraken + "' already exists, please delete first before unzipping again.\n")
-menu()
+main()
