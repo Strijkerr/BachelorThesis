@@ -9,7 +9,8 @@ def main () :
         tree = ET.parse(folder + '/' + file)
         root = tree.getroot()
         if not (root.find('{http://www.rechtspraak.nl/schema/rechtspraak-1.0}uitspraak')
-        or root.find('{http://www.rechtspraak.nl/schema/rechtspraak-1.0}inhoudsindicatie')) :
+        or root.find('{http://www.rechtspraak.nl/schema/rechtspraak-1.0}inhoudsindicatie')
+        or root.find('{http://www.rechtspraak.nl/schema/rechtspraak-1.0}conclusie')) :
             os.remove(folder + '/' + file)
         else :
             count+=1
