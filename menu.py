@@ -145,7 +145,7 @@ def menu_tools () :
                 print("Seconds:",time.time()-seconds)
             elif (var == '2') :
                 seconds = timer(True)
-                subprocess.call(['python3','Scripts/overviewAbstractsJudgments.py'])
+                subprocess.call(['python3','Scripts/decisionStructureChecker.py'])
                 print("Seconds:",time.time()-seconds)
             elif (var == '3') :
                 subprocess.call(['python3','Scripts/csvMaker.py'])
