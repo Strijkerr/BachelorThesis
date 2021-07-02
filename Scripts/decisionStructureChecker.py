@@ -2,7 +2,7 @@
 from bs4 import BeautifulSoup
 import os
 
-folder = os.getcwd() + "/DataSets/OpenDataUitspraken_full"
+folder = os.getcwd() + "/DataSets/OpenDataUitspraken_full" # Veranderen later
 
 total = 0
 judgment = 0
@@ -32,6 +32,7 @@ for file in os.listdir(folder) :
         if (xml.inhoudsindicatie) :
             conclusionAbstract+=1
         else :
+            print(file) # Mag later ook weg
             conclusionNoAbstract+=1
     else :
         empty+=1

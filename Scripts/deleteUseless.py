@@ -16,4 +16,4 @@ def main () :
             count+=1
     print("Files left: ",count)
 
-main ()
+main () # Deze functie nog een keer testen na update
