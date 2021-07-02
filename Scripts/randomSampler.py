@@ -3,9 +3,9 @@ import csv
 import os
 import random
 
-folder = os.getcwd()
-file = folder + "/CSV/SelfRef.csv"
+file = os.getcwd() + "/CSV/SelfRef.csv"
 samples = 5
+
 with open(file) as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     rows = [row for row in csv_reader] 
