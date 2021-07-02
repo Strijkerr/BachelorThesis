@@ -25,17 +25,12 @@ def main () :
         subjectFound = xml.find_all('dcterms:subject')
         if (subjectFound is None) :
             print(file)
-        for c,i in enumerate(xml.find_all('dcterms:subject')) :
-            # if (c == 1) :
-            #     print(file)
-            #     print(i)
+        for i in xml.find_all('dcterms:subject') :
             if (delimiter in i.getText()) :
                 x = i.getText().split(delimiter)
-                #print(x)
                 for j in x :
                     subjects.append(j)
             else :
-                #print(i.getText())
                 subjects.append(i.getText())
         for i in set(subjects) :
             subjects_all.append(i)
