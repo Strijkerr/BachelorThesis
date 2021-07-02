@@ -25,19 +25,21 @@ for file in os.listdir(folder) :
     xml = BeautifulSoup(xmlFile, features="xml")
     xmlFile.close()
 
+    court = file.split('_')[2]
+    if (court == 'PHR') :
+        phr+=1
     if (xml.uitspraak) :
-        court = file.split('_')[2]
-        if (court == 'PHR') :
-            phr+=1
         judgment+=1
         if (xml.inhoudsindicatie) :
             judgmentAbstract+=1
         else :
             judgmentNoAbstract+=1
     elif (xml.conclusie) :
-        court = file.split('_')[2]
         if (court == 'PHR') :
             phr2+=1
+        else :
+            phr3+=1
+            print(file)
         conclusion+=1
         if (xml.inhoudsindicatie) :
             conclusionAbstract+=1
@@ -45,9 +47,6 @@ for file in os.listdir(folder) :
             conclusionNoAbstract+=1
     else :
         empty+=1
-        court = file.split('_')[2]
-        if (court == 'PHR') :
-            phr3+=1
         if (xml.inhoudsindicatie) :
             emptyAbstract+=1
         else :
@@ -65,6 +64,6 @@ print("errorAbstract: ",emptyAbstract)
 print("errorNoAbstract: ",emptyNoAbstract)
 print("Usable: ",(total-emptyNoAbstract))
 
-print("PHR: ", phr)
-print("PHR2: ", phr2)
-print("PHR3: ", phr3)
+print("PHR cases: ", phr)
+print("Conclusion by PHR: ", phr2)
+print("Conclusion not by PHR: ", phr3)
