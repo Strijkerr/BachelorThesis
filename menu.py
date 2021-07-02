@@ -82,7 +82,7 @@ def menu_edit () :
             print("------------------------------------------------------")
             print("---------------EDIT 'OpenDataUitspraken'--------------")
             print("------------------------------------------------------\n")
-            print("1. Remove all court decisions that have no abstract and no judgment from 'OpenDataUitspraken' (< 25 minutes ETA)")
+            print("1. Remove all court decisions that have textual parts in them from 'OpenDataUitspraken' (< 25 minutes ETA)")
             print("2. Exit to main menu")
             var = input('\nEnter action: ')
             if (var == '1') :

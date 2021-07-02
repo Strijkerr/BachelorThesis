@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import os
 
 folder = os.getcwd() + "/DataSets/OpenDataUitspraken_full" # Veranderen later
-
+# Uiteindelijk dit in functies zetten
 total = 0
 judgment = 0
 judgmentAbstract = 0
