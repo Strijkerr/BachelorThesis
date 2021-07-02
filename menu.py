@@ -132,7 +132,7 @@ def menu_tools () :
             print("---------------TOOLS 'OpenDataUitspraken'--------------")
             print("-------------------------------------------------------\n")
             print("1. Get court-decision count (< 3 seconds ETA)")
-            print("2. Overview existence of abstracts and judgments in dataset (< 90 minutes ETA)")
+            print("2. Overview existence of judgments/conclusions and abstracts in dataset (< 90 minutes ETA)")
             print("3. Make CSV files with references (< ?? minutes ETA)")
             print("4. Plot graph (court decisions against years) (exit figure to continue)")
             print("5. Plot graph (court decisions against courts) (exit figure to continue)")
