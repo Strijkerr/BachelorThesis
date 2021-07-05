@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import os
 
 folder = os.getcwd() + "/DataSets/OpenDataUitspraken"
-# Uiteindelijk dit in functies zetten
+
 total = 0
 judgment = 0
 judgmentAbstract = 0
@@ -53,17 +53,17 @@ for file in os.listdir(folder) :
             emptyNoAbstract+=1
 
 print("Total files: ",total) # N.B. RDF always present, cardinality = 1 in documentation
-print("judgment: ",judgment)
-print("judgmentAbstract: ",judgmentAbstract)
-print("judgmentNoAbstract: ",judgmentNoAbstract)
-print("conclusion: ",conclusion)
-print("conclusionAbstract: ",conclusionAbstract)
-print("conclusionNoAbstract: ",conclusionNoAbstract)
-print("empty: ",empty)
-print("errorAbstract: ",emptyAbstract)
-print("errorNoAbstract: ",emptyNoAbstract)
+print("Judgments: ",judgment)
+print("Judgment + abstract: ",judgmentAbstract)
+print("Judgment + no abstract: ",judgmentNoAbstract)
+print("Advisory opinion: ",conclusion)
+print("Advisory opinion + abstract: ",conclusionAbstract)
+print("Advisory opinion + no abstract: ",conclusionNoAbstract)
+print("Empty third section: ",empty)
+print("Empty third section + abstract: ",emptyAbstract)
+print("Empty third section + no abstract: ",emptyNoAbstract)
 print("Usable: ",(total-emptyNoAbstract))
 
-print("PHR cases: ", phr)
-print("Conclusion by PHR: ", phr2)
-print("Conclusion not by PHR: ", phr3)
+print("`PHR' cases: ", phr)
+print("Advisory opinion by `PHR': ", phr2)
+print("Advisory opinion not by `PHR': ", phr3)
