@@ -3,7 +3,7 @@ from re import findall
 from bs4 import BeautifulSoup
 import os
 
-folder = os.getcwd() + "/DataSets/OpenDataUitspraken_100"
+folder = os.getcwd() + "/DataSets/OpenDataUitspraken"
 
 total = 0
 court_decisions_references = 0
