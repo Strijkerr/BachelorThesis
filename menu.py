@@ -159,8 +159,7 @@ def menu_tools () :
             elif (var == '6') :
                 subprocess.call(['python3','Visualization/plotCourts.py'])
             elif (var == '7') :
-                print("Not yet implemented")
-                # subprocess.call(['python3','Visualization/plotAreas_of_Law.py'])
+                subprocess.call(['python3','Visualization/plotAreas_of_Law.py'])
             elif (var == '8') :
                 return     
     else :

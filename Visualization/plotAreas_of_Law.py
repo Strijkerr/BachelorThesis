@@ -22,9 +22,6 @@ def main () :
         xmlFile = open(folder + '/' + file, encoding="utf8")
         xml = BeautifulSoup(xmlFile, features="xml")
         xmlFile.close()
-        subjectFound = xml.find_all('dcterms:subject')
-        if (subjectFound is None) :
-            print(file)
         for i in xml.find_all('dcterms:subject') :
             if (delimiter in i.getText()) :
                 x = i.getText().split(delimiter)
