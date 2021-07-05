@@ -133,11 +133,12 @@ def menu_tools () :
             print("-------------------------------------------------------\n")
             print("1. Get court-decision count (< 3 seconds ETA)")
             print("2. Overview existence of judgments/conclusions and abstracts in dataset (< 90 minutes ETA)")
-            print("3. Make CSV files with references (< ?? minutes ETA)")
-            print("4. Plot graph (court decisions against years) (exit figure to continue)")
-            print("5. Plot graph (court decisions against courts) (exit figure to continue)")
-            print("6. Plot graph (court decisions against areas of law) (exit figure to continue)")
-            print("7. Exit to main menu")
+            print("3. Overview references found in metadata in dataset")
+            print("4. Make CSV files with references (< ?? minutes ETA)")
+            print("5. Plot graph (court decisions against years) (exit figure to continue)")
+            print("6. Plot graph (court decisions against courts) (exit figure to continue)")
+            print("7. Plot graph (court decisions against areas of law) (exit figure to continue)")
+            print("8. Exit to main menu")
             var = input('\nEnter action: ')
             if (var == '1') :
                 seconds = timer(True)
@@ -148,15 +149,19 @@ def menu_tools () :
                 subprocess.call(['python3','Scripts/decisionStructureChecker.py'])
                 print("Seconds:",time.time()-seconds)
             elif (var == '3') :
-                subprocess.call(['python3','Scripts/csvMaker.py'])
+                seconds = timer(True)
+                subprocess.call(['python3','Scripts/countReferences.py'])
+                print("Seconds:",time.time()-seconds)
             elif (var == '4') :
-                subprocess.call(['python3','Visualization/plotYears.py'])
+                subprocess.call(['python3','Scripts/csvMaker.py'])
             elif (var == '5') :
-                subprocess.call(['python3','Visualization/plotCourts.py'])
+                subprocess.call(['python3','Visualization/plotYears.py'])
             elif (var == '6') :
+                subprocess.call(['python3','Visualization/plotCourts.py'])
+            elif (var == '7') :
                 print("Not yet implemented")
                 # subprocess.call(['python3','Visualization/plotAreas_of_Law.py'])
-            elif (var == '7') :
+            elif (var == '8') :
                 return     
     else :
         print("'" + OpenDataUitspraken + "' does not exist yet, please download/unzip it first.\n")
