@@ -12,7 +12,7 @@ import subprocess
 from datetime import date
 
 cwd = os.getcwd()
-OpenDataUitspraken = cwd + "/DataSets/OpenDataUitspraken_100"
+OpenDataUitspraken = cwd + "/DataSets/OpenDataUitspraken"
 OpenDataUitspraken_zip = OpenDataUitspraken + '.zip'
 OpenDataUitspraken_url = "https://static.rechtspraak.nl/PI/OpenDataUitspraken.zip"
 lidodata = cwd + "/DataSets/lidodata"
