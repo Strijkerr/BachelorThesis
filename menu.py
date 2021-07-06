@@ -155,7 +155,7 @@ def menu_tools () :
                 print("Seconds:",time.time()-seconds)
             elif (var == '3') :
                 seconds = timer(True)
-                subprocess.call(['python3','Scripts/count_references.py',OpenDataUitspraken])
+                subprocess.call(['python3','Scripts/check_references.py',OpenDataUitspraken])
                 print("Seconds:",time.time()-seconds)
             elif (var == '4') :
                 seconds = timer(True)
