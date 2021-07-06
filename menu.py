@@ -153,7 +153,9 @@ def menu_tools () :
                 subprocess.call(['python3','Scripts/countReferences.py',OpenDataUitspraken])
                 print("Seconds:",time.time()-seconds)
             elif (var == '4') :
+                seconds = timer(True)
                 subprocess.call(['python3','Scripts/csvMaker.py',OpenDataUitspraken,cwd])
+                print("Seconds:",time.time()-seconds)
             elif (var == '5') :
                 subprocess.call(['python3','Visualization/plotYears.py',OpenDataUitspraken])
             elif (var == '6') :

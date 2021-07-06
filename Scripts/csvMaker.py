@@ -1,12 +1,14 @@
 #!/usr/bin/python3
-import time
 from lxml import etree
 import os
 import csv
 import re
 import sys
 
-seconds = time.time()
+OpenDataUitspraken = sys.argv[1]
+BachelorThesis = sys.argv[2]
+lidodata = "/DataSets/lidodata"
+
 count = 0 
 emptyCitation = 0
 citationCount = 0
@@ -17,10 +19,6 @@ missingReference = 0
 selfReference =0
 decisionList = []
 errorList = []
-
-lidodata = "/DataSets/lidodata"
-BachelorThesis = sys.argv[2]
-OpenDataUitspraken = sys.argv[1]
 
 csvFile = {
     "total": BachelorThesis + "/CSV/Total.csv",
@@ -58,8 +56,8 @@ def findReference(file,row_type) :
     referenceFound = False
     parser2 = etree.parse(file)
     root = parser2.getroot()
-    abstract = root.find("{http://www.rechtspraak.nl/schema/rechtspraak-1.0}inhoudsindicatie") # Max = one abstract section in court decision
-    decision = root.find("{http://www.rechtspraak.nl/schema/rechtspraak-1.0}uitspraak") # Max = one 'uitspraak' section in court decision
+    abstract = root.find("{http://www.rechtspraak.nl/schema/rechtspraak-1.0}inhoudsindicatie") # One abstract section in court decision
+    decision = root.find("{http://www.rechtspraak.nl/schema/rechtspraak-1.0}uitspraak") # One 'uitspraak' section in court decision
 
     if (abstract is not None) :
         for el in abstract.iter():
@@ -83,8 +81,8 @@ def findReference(file,row_type) :
 def printErrorlist() :
     if errorList :
         print("\nThe following ECLI's have not been parsed because of an error (in the dumpfile):")
-    for i in errorList :
-        print(i)
+        for i in errorList :
+            print(i)
 
 def printStats() :
     print("Total Dutch court rulings in LiDO dataset: ", count)
@@ -178,4 +176,3 @@ for file in csvFile :
 
 printStats()
 printErrorlist()
-print("Seconds:",time.time()-seconds)
