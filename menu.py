@@ -142,26 +142,26 @@ def menu_tools () :
             var = input('\nEnter action: ')
             if (var == '1') :
                 seconds = timer(True)
-                subprocess.call(['sh', cwd + '/Scripts/Shell_scripts/countFiles.sh',OpenDataUitspraken])
+                subprocess.call(['sh', cwd + '/Scripts/Shell_scripts/count_files.sh',OpenDataUitspraken])
                 print("Seconds:",time.time()-seconds)
             elif (var == '2') :
                 seconds = timer(True)
-                subprocess.call(['python3','Scripts/decisionStructureChecker.py',OpenDataUitspraken])
+                subprocess.call(['python3','Scripts/check_structure.py',OpenDataUitspraken])
                 print("Seconds:",time.time()-seconds)
             elif (var == '3') :
                 seconds = timer(True)
-                subprocess.call(['python3','Scripts/countReferences.py',OpenDataUitspraken])
+                subprocess.call(['python3','Scripts/count_references.py',OpenDataUitspraken])
                 print("Seconds:",time.time()-seconds)
             elif (var == '4') :
                 seconds = timer(True)
-                subprocess.call(['python3','Scripts/csvMaker.py',OpenDataUitspraken,cwd])
+                subprocess.call(['python3','Scripts/make_csvs.py',OpenDataUitspraken,cwd])
                 print("Seconds:",time.time()-seconds)
             elif (var == '5') :
-                subprocess.call(['python3','Visualization/plotYears.py',OpenDataUitspraken])
+                subprocess.call(['python3','Visualization/plot_years.py',OpenDataUitspraken])
             elif (var == '6') :
-                subprocess.call(['python3','Visualization/plotCourts.py',OpenDataUitspraken])
+                subprocess.call(['python3','Visualization/plot_courts.py',OpenDataUitspraken])
             elif (var == '7') :
-                subprocess.call(['python3','Visualization/plotAreas_of_Law.py',OpenDataUitspraken])
+                subprocess.call(['python3','Visualization/plot_areas.py',OpenDataUitspraken])
             elif (var == '8') :
                 return     
     else :
