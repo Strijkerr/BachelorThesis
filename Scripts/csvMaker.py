@@ -4,6 +4,7 @@ from lxml import etree
 import os
 import csv
 import re
+import sys
 
 seconds = time.time()
 count = 0 
@@ -17,18 +18,18 @@ selfReference =0
 decisionList = []
 errorList = []
 
-lidodata = "DataSets/lidodata"
-BachelorThesis = os.getcwd() + '/'
-OpenDataUitspraken = BachelorThesis + "DataSets/OpenDataUitspraken/" # Uitkijken, als je de map als argument meegeeft aan de functie, dan geef je die meestal mee zonder / op het einde
+lidodata = "/DataSets/lidodata"
+BachelorThesis = sys.argv[2]
+OpenDataUitspraken = sys.argv[1]
 
 csvFile = {
-    "total": BachelorThesis + "CSV/Total.csv",
-    "future": BachelorThesis + "CSV/Future.csv",
-    "empty_citations": BachelorThesis + "CSV/EmptyC.csv",
-    "empty_references": BachelorThesis + "CSV/EmptyR.csv",
-    "missing_references": BachelorThesis + "CSV/Missing.csv",
-    "reference_format_error": BachelorThesis + "CSV/RefError.csv",
-    "self_reference": BachelorThesis + "CSV/SelfRef.csv"
+    "total": BachelorThesis + "/CSV/Total.csv",
+    "future": BachelorThesis + "/CSV/Future.csv",
+    "empty_citations": BachelorThesis + "/CSV/EmptyC.csv",
+    "empty_references": BachelorThesis + "/CSV/EmptyR.csv",
+    "missing_references": BachelorThesis + "/CSV/Missing.csv",
+    "reference_format_error": BachelorThesis + "/CSV/RefError.csv",
+    "self_reference": BachelorThesis + "/CSV/SelfRef.csv"
 }
 
 rows = {
@@ -110,7 +111,7 @@ try:
             if (about != None and about.startswith("http://linkeddata.overheid.nl/terms/jurisprudentie/id/ECLI:NL")): # We only want Dutch court cases
                 try: # Get name, filename and reference
                     ECLI = about.rsplit('/', 1)[1] # Get ECLI filename
-                    ECLI_filename = ECLI.replace(':', '_') + ".xml" # Remove ':' from filenames
+                    ECLI_filename = '/' + ECLI.replace(':', '_') + ".xml" # Remove ':' from filenames
                     citations = element.findall('{http://linkeddata.overheid.nl/terms/}refereertAan') # Get all references found in the ECLI metadata
                     count+=1 # Reference countrows
                     try :  
