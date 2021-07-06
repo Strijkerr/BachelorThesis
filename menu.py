@@ -87,7 +87,7 @@ def menu_edit () :
             var = input('\nEnter action: ')
             if (var == '1') :
                 seconds = timer(True)
-                subprocess.call(['python3','Scripts/deleteUseless.py',OpenDataUitspraken])
+                subprocess.call(['python3','Scripts/filter_OpenDataUitspraken.py',OpenDataUitspraken])
                 print("Seconds:",time.time()-seconds)
             elif (var == '2') :
                 return 
