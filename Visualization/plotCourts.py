@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import os
 import re
+import sys
 import matplotlib.pyplot as plt
 from collections import Counter
 
@@ -33,10 +34,10 @@ def plot (court_codes_dict) :
 
 # Main
 def main () :
-    folder = os.getcwd() + "/DataSets/OpenDataUitspraken"
+    folder = sys.argv[1]
     court_codes = []
-    
     years = []
+    
     for file in os.listdir(folder) : 
         years.append(file.split('_')[3])
     defaultStart = int(min(years)) # To get default starting year

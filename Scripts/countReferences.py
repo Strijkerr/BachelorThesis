@@ -2,9 +2,9 @@
 from re import findall
 from bs4 import BeautifulSoup
 import os
+import sys
 
-folder = os.getcwd() + "/DataSets/OpenDataUitspraken"
-
+folder = sys.argv[1]
 total = 0
 court_decisions_references = 0
 total_reference = 0

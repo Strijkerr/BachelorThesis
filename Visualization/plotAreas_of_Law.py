@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import os
+import sys
 from bs4 import BeautifulSoup
 from collections import Counter
 import matplotlib.pyplot as plt
@@ -14,7 +15,7 @@ def plot (subject_dict) :
 
 # main
 def main () :
-    folder = os.getcwd() + "/DataSets/OpenDataUitspraken"
+    folder = sys.argv[1]
     delimiter = "; "
     subjects_all = []
     for file in os.listdir(folder) :

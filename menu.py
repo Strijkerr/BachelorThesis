@@ -146,20 +146,20 @@ def menu_tools () :
                 print("Seconds:",time.time()-seconds)
             elif (var == '2') :
                 seconds = timer(True)
-                subprocess.call(['python3','Scripts/decisionStructureChecker.py'])
+                subprocess.call(['python3','Scripts/decisionStructureChecker.py',OpenDataUitspraken])
                 print("Seconds:",time.time()-seconds)
             elif (var == '3') :
                 seconds = timer(True)
-                subprocess.call(['python3','Scripts/countReferences.py'])
+                subprocess.call(['python3','Scripts/countReferences.py',OpenDataUitspraken])
                 print("Seconds:",time.time()-seconds)
             elif (var == '4') :
-                subprocess.call(['python3','Scripts/csvMaker.py'])
+                subprocess.call(['python3','Scripts/csvMaker.py',OpenDataUitspraken])
             elif (var == '5') :
-                subprocess.call(['python3','Visualization/plotYears.py'])
+                subprocess.call(['python3','Visualization/plotYears.py',OpenDataUitspraken])
             elif (var == '6') :
-                subprocess.call(['python3','Visualization/plotCourts.py'])
+                subprocess.call(['python3','Visualization/plotCourts.py',OpenDataUitspraken])
             elif (var == '7') :
-                subprocess.call(['python3','Visualization/plotAreas_of_Law.py'])
+                subprocess.call(['python3','Visualization/plotAreas_of_Law.py',OpenDataUitspraken])
             elif (var == '8') :
                 return     
     else :

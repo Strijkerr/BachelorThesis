@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 from bs4 import BeautifulSoup
 import os
+import sys
 
-folder = os.getcwd() + "/DataSets/OpenDataUitspraken"
-
+folder = sys.argv[1]
 total = 0
 judgment = 0
 judgmentAbstract = 0
