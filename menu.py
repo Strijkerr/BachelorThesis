@@ -103,7 +103,7 @@ def menu_setup () :
         print("1. Download 'OpenDataUitspraken.zip' (+~5.4GB needs to be available) (ETA < 9 minutes)")
         print("2. Unzip and unpack 'OpenDataUitspraken.zip' (+~24GB needs to be available) (ETA < 37 minutes")
         print("3. Download 'lidodata.gz' (+~1.4GB needs to be available) (ETA < 7 minutes)")
-        print("4. Unzip and unpack 'OpenDataUitspraken.zip' (+~38.2GB needs to be available) (ETA < 11 minutes)")
+        print("4. Unzip `lidodata.gz` (+~38.2GB needs to be available) (ETA < 11 minutes)")
         print("5. Exit to main menu")
         var = input('\nEnter action: ')
         if (var == '1') :
