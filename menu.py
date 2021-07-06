@@ -15,7 +15,7 @@ cwd = os.getcwd()
 OpenDataUitspraken = cwd + "/DataSets/OpenDataUitspraken"
 OpenDataUitspraken_zip = OpenDataUitspraken + '.zip'
 OpenDataUitspraken_url = "https://static.rechtspraak.nl/PI/OpenDataUitspraken.zip"
-lidodata = cwd + "/DataSets/lidodata"
+lidodata = cwd + "/DataSets/lidotest" # lidodata
 lidodata_gz = lidodata + '.gz'
 lidodata_url = "https://data.overheid.nl/OpenDataSets/lido/lidodata.gz"
 

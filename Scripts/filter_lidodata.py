@@ -3,7 +3,7 @@ import os
 
 def main () :
     file1 = os.getcwd() + '/DataSets/lidodata'
-    file2 = os.getcwd() + '/DataSets/test'
+    file2 = os.getcwd() + '/DataSets/lidotest'
     resetFile(file2)
     with open(file1) as input_file :
         printing = False
