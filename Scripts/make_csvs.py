@@ -102,9 +102,9 @@ def printStats() :
     # print("Length missing: ",(len(rows["missing_references"])-len(rows["empty_references"])-len(rows["empty_citations"])))
 
 try:
-    parser = etree.iterparse(BachelorThesis + lidodata, events=('start','end'))
+    parser = etree.iterparse(lidodata, events=('start','end'))
     try:
-        for event, element in parser: # Loop through liodata
+        for event, element in parser: # Loop through lidodata
             about = element.get('{http://www.w3.org/1999/02/22-rdf-syntax-ns#}about') # The 'about' attribute represents the content of the node
             if (about != None and about.startswith("http://linkeddata.overheid.nl/terms/jurisprudentie/id/ECLI:NL")): # We only want Dutch court cases
                 try: # Get name, filename and reference
