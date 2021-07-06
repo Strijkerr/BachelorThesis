@@ -105,13 +105,13 @@ parser = etree.iterparse(lidodata, events=('start','end'))
 for event, element in parser: # Loop through lidodata
     about = element.get('{http://www.w3.org/1999/02/22-rdf-syntax-ns#}about') # The 'about' attribute represents the content of the node
     if (about != None and about.startswith("http://linkeddata.overheid.nl/terms/jurisprudentie/id/ECLI:NL")): # We only want Dutch court cases
-        ECLI = about.rsplit('/', 1)[1] # Get ECLI filename
+        ECLI = about.rsplit('/', 1)[1] # Get ECLI
         ECLI_filename = '/' + ECLI.replace(':', '_') + ".xml" # Remove ':' from filenames
-        citations = element.findall('{http://linkeddata.overheid.nl/terms/}refereertAan') # Get all references found in the ECLI metadata
+        citations = element.findall('{http://linkeddata.overheid.nl/terms/}refereertAan') # Get references from about node
         count+=1 # Total abouts
         run_once = True                
         for ref in citations :
-            if (ref.text != None and "target=ecli" in ref.text) : # We only want rulings that contain ECLI references
+            if (ref.text != None and "target=ecli" in ref.text) : # Only ECLI references
                 if os.path.exists(OpenDataUitspraken + ECLI_filename) : # Check if the LiDO legal rulings with > 0 references to other rulings are in the rechtspraak.nl dataset
                     try :
                         citation = ref.text.split("opschrift=")[1]
@@ -146,8 +146,8 @@ for event, element in parser: # Loop through lidodata
                                 writeToRow("-","missing_references")
                                 missingReference+=1
                     except Exception as e :
-                        errorList.append(ECLI) # Hij pakt hier 10 ECLI's waarvan de verwijzing met findall niet goed gepakt wordt
-    element.clear() # Clear element from dump file, frees up memory
+                        errorList.append(ECLI) # 10 exceptions here
+    element.clear() # Frees memory
 
 for file in csvFile :
     if not os.path.exists(csvFile[file]) :

@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 import os
-import sys
 
 def main () :
     file1 = os.getcwd() + '/DataSets/lidodata'
