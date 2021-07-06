@@ -101,74 +101,53 @@ def printStats() :
     # print("Length emptyR: ",len(rows["empty_references"]))
     # print("Length missing: ",(len(rows["missing_references"])-len(rows["empty_references"])-len(rows["empty_citations"])))
 
-try:
-    parser = etree.iterparse(lidodata, events=('start','end'))
-    try:
-        for event, element in parser: # Loop through lidodata
-            about = element.get('{http://www.w3.org/1999/02/22-rdf-syntax-ns#}about') # The 'about' attribute represents the content of the node
-            if (about != None and about.startswith("http://linkeddata.overheid.nl/terms/jurisprudentie/id/ECLI:NL")): # We only want Dutch court cases
-                try: # Get name, filename and reference
-                    ECLI = about.rsplit('/', 1)[1] # Get ECLI filename
-                    ECLI_filename = '/' + ECLI.replace(':', '_') + ".xml" # Remove ':' from filenames
-                    citations = element.findall('{http://linkeddata.overheid.nl/terms/}refereertAan') # Get all references found in the ECLI metadata
-                    count+=1 # Reference countrows
-                    try :  
-                        run_once = True                
-                        for ref in citations :
-                            if (ref.text != None and "target=ecli" in ref.text) : # We only want rulings that contain ECLI references
-                                try :
-                                    if os.path.exists(OpenDataUitspraken + ECLI_filename) : # Check if the LiDO legal rulings with > 0 references to other rulings are in the rechtspraak.nl dataset
-                                        try :
-                                            citation = ref.text.split("opschrift=")[1]
-                                            citationCount+=1
-                                            if (run_once) :
-                                                decisionList.append(ECLI) # Run once per ECLI
-                                                run_once = False
-                                            try : # Run per citation
-                                                ref_ECLI = ref.text.split("uri=")[1].split('|')[0]
-                                                makeRow = True
-                                                if (citation == "" or citation == '\n') : # We only want references with an anchor text
-                                                    emptyCitation+=1
-                                                    writeToRow("-","empty_citations")
-                                                    makeRow = False
-                                                if (ref_ECLI == "!" or ref_ECLI == '\n' or ref_ECLI == '') : # We only want references that refer to something
-                                                    emptyReference+=1
-                                                    findReference(OpenDataUitspraken + ECLI_filename,"empty_references") # Als hij hem hierin niet vind, dan is het aantal rows niet gelijk aan #emptyReference
-                                                    makeRow = False
-                                                if (makeRow) :
-                                                    year = ECLI.split(':')[3]
-                                                    if (ECLI == ref_ECLI) :
-                                                        selfReference+=1
-                                                        findReference(OpenDataUitspraken + ECLI_filename,"self_reference")
-                                                    if (re.match(r"!?ECLI:.+:.+:\d\d\d\d:.+",ref_ECLI)) : # Check future references, also allows ECLIECLI formats
-                                                        ref_year = ref_ECLI.split(':')[3].split(':')[0]
-                                                        if (int(ref_year) > int(year)) :
-                                                            findReference(OpenDataUitspraken + ECLI_filename,"future")
-                                                            futureReference+=1
-                                                    else : 
-                                                        referenceError+=1 # Reference not in the right format
-                                                        findReference(OpenDataUitspraken + ECLI_filename,"reference_format_error")
-                                                    try :
-                                                        if not findReference(OpenDataUitspraken + ECLI_filename,"total") : # There might be more occurences of citations in the text     
-                                                            writeToRow("-","missing_references")
-                                                            missingReference+=1
-                                                    except Exception as e :
-                                                        print(e) # Never reaches
-                                            except Exception as e :
-                                                print(e) # Never reaches
-                                        except Exception as e :
-                                            errorList.append(ECLI) # Hij pakt hier 10 ECLI's waarvan de verwijzing met findall niet goed gepakt wordt
-                                except Exception as e :
-                                    print(e) # Never reaches
+parser = etree.iterparse(lidodata, events=('start','end'))
+for event, element in parser: # Loop through lidodata
+    about = element.get('{http://www.w3.org/1999/02/22-rdf-syntax-ns#}about') # The 'about' attribute represents the content of the node
+    if (about != None and about.startswith("http://linkeddata.overheid.nl/terms/jurisprudentie/id/ECLI:NL")): # We only want Dutch court cases
+        ECLI = about.rsplit('/', 1)[1] # Get ECLI filename
+        ECLI_filename = '/' + ECLI.replace(':', '_') + ".xml" # Remove ':' from filenames
+        citations = element.findall('{http://linkeddata.overheid.nl/terms/}refereertAan') # Get all references found in the ECLI metadata
+        count+=1 # Total abouts
+        run_once = True                
+        for ref in citations :
+            if (ref.text != None and "target=ecli" in ref.text) : # We only want rulings that contain ECLI references
+                if os.path.exists(OpenDataUitspraken + ECLI_filename) : # Check if the LiDO legal rulings with > 0 references to other rulings are in the rechtspraak.nl dataset
+                    try :
+                        citation = ref.text.split("opschrift=")[1]
+                        citationCount+=1
+                        if (run_once) :
+                            decisionList.append(ECLI) # Run once per ECLI
+                            run_once = False
+                        ref_ECLI = ref.text.split("uri=")[1].split('|')[0]
+                        makeRow = True
+                        if (citation == "" or citation == '\n') : # We only want references with an anchor text
+                            emptyCitation+=1
+                            writeToRow("-","empty_citations")
+                            makeRow = False
+                        if (ref_ECLI == "!" or ref_ECLI == '\n' or ref_ECLI == '') : # We only want references that refer to something
+                            emptyReference+=1
+                            findReference(OpenDataUitspraken + ECLI_filename,"empty_references") # Als hij hem hierin niet vind, dan is het aantal rows niet gelijk aan #emptyReference
+                            makeRow = False
+                        if (makeRow) :
+                            year = ECLI.split(':')[3]
+                            if (ECLI == ref_ECLI) :
+                                selfReference+=1
+                                findReference(OpenDataUitspraken + ECLI_filename,"self_reference")
+                            if (re.match(r"!?ECLI:.+:.+:\d\d\d\d:.+",ref_ECLI)) : # Check future references, also allows ECLIECLI formats
+                                ref_year = ref_ECLI.split(':')[3].split(':')[0]
+                                if (int(ref_year) > int(year)) :
+                                    findReference(OpenDataUitspraken + ECLI_filename,"future")
+                                    futureReference+=1
+                            else : 
+                                referenceError+=1 # Reference not in the right format
+                                findReference(OpenDataUitspraken + ECLI_filename,"reference_format_error")
+                            if not findReference(OpenDataUitspraken + ECLI_filename,"total") : # There might be more occurences of citations in the text     
+                                writeToRow("-","missing_references")
+                                missingReference+=1
                     except Exception as e :
-                        print(e) # Never reaches
-                except Exception as e :
-                    print(e) # Never reaches
-            element.clear() # Clear element from dump file, frees up memory
-    except Exception as e :
-        print(e) # Never reaches
-except Exception as e :
-    print(e) # Never reaches
+                        errorList.append(ECLI) # Hij pakt hier 10 ECLI's waarvan de verwijzing met findall niet goed gepakt wordt
+    element.clear() # Clear element from dump file, frees up memory
 
 for file in csvFile :
     if not os.path.exists(csvFile[file]) :
