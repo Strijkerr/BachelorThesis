@@ -7,7 +7,7 @@ import sys
 
 OpenDataUitspraken = sys.argv[1]
 BachelorThesis = sys.argv[2]
-lidodata = "/DataSets/lidodata"
+lidodata = sys.argv[3]
 
 count = 0 
 emptyCitation = 0

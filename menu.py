@@ -15,7 +15,7 @@ cwd = os.getcwd()
 OpenDataUitspraken = cwd + "/DataSets/OpenDataUitspraken"
 OpenDataUitspraken_zip = OpenDataUitspraken + '.zip'
 OpenDataUitspraken_url = "https://static.rechtspraak.nl/PI/OpenDataUitspraken.zip"
-lidodata = cwd + "/DataSets/lidodata"
+lidodata = cwd + "/DataSets/lidotest"
 lidodata_gz = lidodata + '.gz'
 lidodata_url = "https://data.overheid.nl/OpenDataSets/lido/lidodata.gz"
 
@@ -154,7 +154,7 @@ def menu_tools () :
                 print("Seconds:",time.time()-seconds)
             elif (var == '4') :
                 seconds = timer(True)
-                subprocess.call(['python3','Scripts/make_csvs.py',OpenDataUitspraken,cwd])
+                subprocess.call(['python3','Scripts/make_csvs.py',OpenDataUitspraken,cwd,lidodata])
                 print("Seconds:",time.time()-seconds)
             elif (var == '5') :
                 subprocess.call(['python3','Visualization/plot_years.py',OpenDataUitspraken])
