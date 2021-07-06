@@ -15,7 +15,7 @@ cwd = os.getcwd()
 OpenDataUitspraken = cwd + "/DataSets/OpenDataUitspraken"
 OpenDataUitspraken_zip = OpenDataUitspraken + '.zip'
 OpenDataUitspraken_url = "https://static.rechtspraak.nl/PI/OpenDataUitspraken.zip"
-lidodata = cwd + "/DataSets/lidotest"
+lidodata = cwd + "/DataSets/lidodata"
 lidodata_gz = lidodata + '.gz'
 lidodata_url = "https://data.overheid.nl/OpenDataSets/lido/lidodata.gz"
 
@@ -80,16 +80,21 @@ def menu_edit () :
     if os.path.exists(OpenDataUitspraken) :
         while True :
             print("------------------------------------------------------")
-            print("---------------EDIT 'OpenDataUitspraken'--------------")
+            print("---------------------EDIT datasets--------------------")
             print("------------------------------------------------------\n")
-            print("1. Remove all court decisions that have no textual parts in them from dataset (< 25 minutes ETA)")
-            print("2. Exit to main menu")
+            print("1. Remove all court decisions that have no textual parts in them from `OpenDataUitspraken' (< 25 minutes ETA)")
+            print("2. Remove all unusable stuff from `lidodata' (< ? minutes ETA) (+~12GB needed temporarily)")
+            print("3. Exit to main menu")
             var = input('\nEnter action: ')
             if (var == '1') :
                 seconds = timer(True)
                 subprocess.call(['python3','Scripts/filter_OpenDataUitspraken.py',OpenDataUitspraken])
                 print("Seconds:",time.time()-seconds)
             elif (var == '2') :
+                seconds = timer(True)
+                subprocess.call(['python3','Scripts/filter_lidodata.py',lidodata])
+                print("Seconds:",time.time()-seconds)
+            elif (var == '3') :
                 return 
     else :
         print("'" + OpenDataUitspraken + "' does not exist yet, please download/unzip it first.\n")
