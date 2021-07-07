@@ -7,8 +7,8 @@ import sys
 def writeToCSV (csvFile,rows) :
     if not os.path.exists(csvFile) :
         fields = ["ECLI","Ref_ECLI","Anchor text"]
-        with open(csvFile, 'w') as csvFile: # Seperated by in libreoffie can't be tab
-            csvWriter = csv.writer(csvFile) 
+        with open(csvFile, 'w') as csvOpen: # Seperated by in libreoffie can't be tab
+            csvWriter = csv.writer(csvOpen) 
             csvWriter.writerow(fields) 
             csvWriter.writerows(rows)
 
@@ -88,4 +88,4 @@ def main () :
     printErrorlist(errorList)
     writeToCSV(csvFile,rows)
 
-
+main()
