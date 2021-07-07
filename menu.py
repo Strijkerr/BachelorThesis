@@ -134,7 +134,7 @@ def menu_tools () :
             print("1. Get court-decision count (< 3 seconds ETA)")
             print("2. Overview existence of judgments/advisory opinions and abstracts in dataset (< 90 minutes ETA)")
             print("3. Overview references found in metadata of files in dataset")
-            print("4. Make CSV files with references (< ?? minutes ETA)")
+            print("4. Extract all references to 1 csv (< ?? minutes ETA)")
             print("5. Plot graph (court decisions against years) (exit figure to continue)")
             print("6. Plot graph (court decisions against courts) (exit figure to continue)")
             print("7. Plot graph (court decisions against areas of law) (exit figure to continue)")
