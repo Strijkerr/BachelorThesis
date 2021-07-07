@@ -43,13 +43,13 @@ def main () :
     refNone = 0
     refElse = 0
     aboutElse = 0
-    csvFile = BachelorThesis + "/CSV/Total.csv",
+    csvFile = BachelorThesis + "/CSV/Total.csv"
     rows = []
     aboutNone = 0
     aboutECLI = 0 
     decisionNotPresent = 0
     parser = etree.iterparse(lidodata, events=('start','end'))
-
+    
     for event, element in parser: # Loop through lidodata
         about = element.get('{http://www.w3.org/1999/02/22-rdf-syntax-ns#}about') # The 'about' attribute represents the content of the node
         if (about == None) :
