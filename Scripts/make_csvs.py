@@ -9,7 +9,6 @@ OpenDataUitspraken = sys.argv[1]
 BachelorThesis = sys.argv[2]
 lidodata = sys.argv[3]
 
-count = 0 
 emptyCitation = 0
 citationCount = 0
 emptyReference = 0
@@ -18,7 +17,16 @@ referenceError = 0
 missingReference = 0
 selfReference =0
 decisionList = []
+decisionList2 = []
 errorList = []
+
+aboutNone = 0
+aboutECLI = 0 
+decisionNotPresent = 0
+
+refNone = 0
+refElse = 0
+aboutElse = 0
 
 csvFile = {
     "total": BachelorThesis + "/CSV/Total.csv",
@@ -85,41 +93,47 @@ def printErrorlist() :
             print(i)
 
 def printStats() :
-    print("Total Dutch court rulings in LiDO dataset: ", count)
-    print("Dutch court rulings with >= 1 ECLI citations in LiDO dataset that intersect with rechtspraak.nl dataset(~530k): ",len(decisionList))
+    print("Total ECLI elements in LiDO dataset: ", aboutECLI)
+    print("Dutch court rulings with in LiDO dataset that intersect with `OpenDataUitspraken` dataset: ",len(decisionList))
     print("Final amount of court cases (intersections-doubles): ", len(set(decisionList)))
+    print("Dutch court rulings with in LiDO dataset that intersect with `OpenDataUitspraken` dataset and have > 0 ecli references: ",len(decisionList2))
+    print("Final amount of court cases (intersections-doubles) and have > 0 ecli references: ", len(set(decisionList2)))
     print("Empty citations: ", emptyCitation)
     print("Empty references: ", emptyReference)
     print("Future references: ", futureReference)
     print("Self references: ", selfReference)
     print("Reference ECLI format errors: ", referenceError)
     print("Citationcount/anchor texts: ", citationCount)
-    print("Row count total: ", len(rows["total"]))
-    print("Rows future count total: ", len(rows["future"]))
+    print("Total.csv row count total: ", len(rows["total"]))
+    print("Future.csv row count total: ", len(rows["future"]))
     print("References not found: ", ((missingReference-emptyCitation)-emptyReference))
-    # print("Length emptyC: ",len(rows["empty_citations"]))
-    # print("Length emptyR: ",len(rows["empty_references"]))
-    # print("Length missing: ",(len(rows["missing_references"])-len(rows["empty_references"])-len(rows["empty_citations"])))
 
 parser = etree.iterparse(lidodata, events=('start','end'))
+
 for event, element in parser: # Loop through lidodata
     about = element.get('{http://www.w3.org/1999/02/22-rdf-syntax-ns#}about') # The 'about' attribute represents the content of the node
-    if (about != None and about.startswith("http://linkeddata.overheid.nl/terms/jurisprudentie/id/ECLI:NL")): # We only want Dutch court cases
+    if (about == None) :
+        aboutNone+=1
+    elif (about.startswith("http://linkeddata.overheid.nl/terms/jurisprudentie/id/ECLI:NL")): # Filter for Dutch court cases
         ECLI = about.rsplit('/', 1)[1] # Get ECLI
-        ECLI_filename = '/' + ECLI.replace(':', '_') + ".xml" # Remove ':' from filenames
-        citations = element.findall('{http://linkeddata.overheid.nl/terms/}refereertAan') # Get references from about node
-        count+=1 # Total abouts
-        run_once = True                
-        for ref in citations :
-            if (ref.text != None and "target=ecli" in ref.text) : # Only ECLI references
-                if os.path.exists(OpenDataUitspraken + ECLI_filename) : # Check if the LiDO legal rulings with > 0 references to other rulings are in the rechtspraak.nl dataset
+        ECLI_filename = '/' + ECLI.replace(':', '_') + ".xml" # Translate ECLI to ECLI filename in `OpenDataUitspraken'`
+        aboutECLI+=1 # Count ECLI meta
+        if os.path.exists(OpenDataUitspraken + ECLI_filename) : # Court decision must also exist in `OpenDataUitspraken`
+            decisionList.append(ECLI) # Run once per ECLI
+            references = element.findall('{http://linkeddata.overheid.nl/terms/}refereertAan') # Get all references in that node
+            run_once = True             
+            for ref in references : # Loop through all* references
+                if (ref.text == None) :
+                    refNone+=1
+                elif ("target=ecli" in ref.text) : # Filter for ECLI references
+                    if (run_once) :
+                        decisionList2.append(ECLI)
+                        run_once = False
                     try :
                         citation = ref.text.split("opschrift=")[1]
-                        citationCount+=1
-                        if (run_once) :
-                            decisionList.append(ECLI) # Run once per ECLI
-                            run_once = False
                         ref_ECLI = ref.text.split("uri=")[1].split('|')[0]
+                        citationCount+=1
+                        # Hier gewoon totaal wegscrijven?
                         makeRow = True
                         if (citation == "" or citation == '\n') : # We only want references with an anchor text
                             emptyCitation+=1
@@ -142,16 +156,29 @@ for event, element in parser: # Loop through lidodata
                             else : 
                                 referenceError+=1 # Reference not in the right format
                                 findReference(OpenDataUitspraken + ECLI_filename,"reference_format_error")
-                            if not findReference(OpenDataUitspraken + ECLI_filename,"total") : # There might be more occurences of citations in the text     
+                            if not findReference(OpenDataUitspraken + ECLI_filename,"total") : # There might be more occurences of references in the text     
                                 writeToRow("-","missing_references")
                                 missingReference+=1
                     except Exception as e :
                         errorList.append(ECLI) # 10 exceptions here
+                else :
+                    refElse+=1
+        else :
+            decisionNotPresent+=1
+    else :
+        aboutElse+=1
     element.clear() # Frees memory
 
 for file in csvFile :
     if not os.path.exists(csvFile[file]) :
         writeToCSV(csvFile[file],rows[file])
 
+print("Empty elements (useless)",aboutNone)  # Useless
+print("Elements not ECLI (useless)",aboutElse) # Useless
+print("Court decision not present in `OpenDataUitspraken': ",decisionNotPresent) # Useless
+print("refNone",refNone) # Uitzoeken hoe dit kan
+print("refElse",refElse) # Useless
+
+print('\n')
 printStats()
 printErrorlist()

@@ -25,7 +25,7 @@ def download (url,zip) :
         response = requests.get(url, stream=True)
         total_size_in_bytes= int(response.headers.get('content-length', 0))
         print(total_size_in_bytes)
-        block_size = 1024 #1 Kibibyte
+        block_size = 1024
         progress_bar = tqdm(total=total_size_in_bytes, unit='iB', unit_scale=True)
         with open(zip, 'wb') as file:
             for data in response.iter_content(block_size):
@@ -83,18 +83,13 @@ def menu_edit () :
             print("---------------------EDIT datasets--------------------")
             print("------------------------------------------------------\n")
             print("1. Remove all court decisions that have no textual parts in them from `OpenDataUitspraken' (< 25 minutes ETA)")
-            print("2. Remove all unusable stuff from `lidodata' (< ? minutes ETA) (+~12GB needed temporarily)")
-            print("3. Exit to main menu")
+            print("2. Exit to main menu")
             var = input('\nEnter action: ')
             if (var == '1') :
                 seconds = timer(True)
                 subprocess.call(['python3','Scripts/filter_OpenDataUitspraken.py',OpenDataUitspraken])
                 print("Seconds:",time.time()-seconds)
             elif (var == '2') :
-                seconds = timer(True)
-                subprocess.call(['python3','Scripts/filter_lidodata.py',lidodata])
-                print("Seconds:",time.time()-seconds)
-            elif (var == '3') :
                 return 
     else :
         print("'" + OpenDataUitspraken + "' does not exist yet, please download/unzip it first.\n")
