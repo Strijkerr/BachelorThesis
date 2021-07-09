@@ -4,32 +4,19 @@ import os
 import csv
 import sys
 
-def writeToCSV (csvFile,rows) :
-    if not os.path.exists(csvFile) :
-        fields = ["ECLI","Ref_ECLI","Anchor text"]
-        with open(csvFile, 'w') as csvOpen: # Seperated by in libreoffie can't be tab
+
+def checkExcluded (decisionList,OpenDataUitspraken,csvExcluded) :
+    rows_excluded = []
+    for file in os.listdir(OpenDataUitspraken) :
+        if (file not in decisionList) :
+            rows_excluded.append(file)
+    print("\nRows ecluded: ",len(rows_excluded))
+    print("Rows ecluded (set): ",len(set(rows_excluded)))
+    if not os.path.exists(csvExcluded) :
+        with open(csvExcluded, 'w') as csvOpen: # Seperated by in libreoffie can't be tab
             csvWriter = csv.writer(csvOpen) 
-            csvWriter.writerow(fields) 
-            csvWriter.writerows(rows)
-
-def printErrorlist(errorList) :
-    if errorList :
-        print("\nThe following ECLI's have not been parsed because of an error (in the dumpfile):")
-        for i in errorList :
-            print(i)
-
-def printStats(aboutECLI,decisionList,decisionList2,citationCount,aboutNone,aboutElse,decisionNotPresent,refNone,refElse) :
-    print("Total ECLI elements in LiDO dataset: ", aboutECLI)
-    print("Dutch court rulings with in LiDO dataset that intersect with `OpenDataUitspraken` dataset: ",len(decisionList))
-    print("Final amount of court cases (intersections-doubles): ", len(set(decisionList)))
-    print("Dutch court rulings with in LiDO dataset that intersect with `OpenDataUitspraken` dataset and have > 0 ecli references: ",len(decisionList2))
-    print("Final amount of court cases (intersections-doubles) and have > 0 ecli references: ", len(set(decisionList2)))
-    print("Citations: ", citationCount)
-    print("Empty elements (useless)",aboutNone)  # Useless
-    print("Elements not ECLI (useless)",aboutElse) # Useless
-    print("Court decision not present in `OpenDataUitspraken': ",decisionNotPresent) # Useless
-    print("refNone",refNone) # Uitzoeken hoe dit kan, waarom zijn deze None
-    print("refElse",refElse) # Useless
+            csvWriter.writerow(["ECLI"]) 
+            csvWriter.writerows([rows_excluded])
 
 def main () :
     OpenDataUitspraken = sys.argv[1]
@@ -56,10 +43,10 @@ def main () :
             aboutNone+=1
         elif (about.startswith("http://linkeddata.overheid.nl/terms/jurisprudentie/id/ECLI:NL")): # Filter for Dutch court cases
             ECLI = about.rsplit('/', 1)[1] # Get ECLI
-            ECLI_filename = '/' + ECLI.replace(':', '_') + ".xml" # Translate ECLI to ECLI filename in `OpenDataUitspraken'`
+            ECLI_filename = ECLI.replace(':', '_') + ".xml" # Translate ECLI to ECLI filename in `OpenDataUitspraken'`
             aboutECLI+=1 # Count ECLI meta
-            if os.path.exists(OpenDataUitspraken + ECLI_filename) : # Court decision must also exist in `OpenDataUitspraken`
-                decisionList.append(ECLI) # Run once per ECLI
+            if os.path.exists(OpenDataUitspraken + '/' +  ECLI_filename) : # Court decision must also exist in `OpenDataUitspraken`
+                decisionList.append(ECLI_filename) # Run once per ECLI
                 references = element.findall('{http://linkeddata.overheid.nl/terms/}refereertAan') # Get all references in that node
                 run_once = True             
                 for ref in references : # Loop through all* references
@@ -86,6 +73,33 @@ def main () :
         element.clear() # Frees memory
     printStats(aboutECLI,decisionList,decisionList2,citationCount,aboutNone,aboutElse,decisionNotPresent,refNone,refElse)
     printErrorlist(errorList)
-    writeToCSV(csvFile,rows)
+    writeToCSV(csvFile,rows,["ECLI","Ref_ECLI","Anchor text"])
+    checkExcluded(decisionList,OpenDataUitspraken,BachelorThesis + "/CSV/Excluded.csv")
+
+def printErrorlist(errorList) :
+    if errorList :
+        print("\nThe following ECLI's have not been parsed because of an error (in the dumpfile):")
+        for i in errorList :
+            print(i)
+
+def printStats(aboutECLI,decisionList,decisionList2,citationCount,aboutNone,aboutElse,decisionNotPresent,refNone,refElse) :
+    print("Total ECLI elements in LiDO dataset: ", aboutECLI)
+    print("Dutch court rulings with in LiDO dataset that intersect with `OpenDataUitspraken` dataset: ",len(decisionList))
+    print("Final amount of court cases (intersections-doubles): ", len(set(decisionList)))
+    print("Dutch court rulings with in LiDO dataset that intersect with `OpenDataUitspraken` dataset and have > 0 ecli references: ",len(decisionList2))
+    print("Final amount of court cases (intersections-doubles) and have > 0 ecli references: ", len(set(decisionList2)))
+    print("Citations: ", citationCount)
+    print("Empty elements (useless)",aboutNone)  # Useless
+    print("Elements not ECLI (useless)",aboutElse) # Useless
+    print("Court decision not present in `OpenDataUitspraken': ",decisionNotPresent) # Useless
+    print("refNone",refNone) # Uitzoeken hoe dit kan, waarom zijn deze None
+    print("refElse",refElse) # Useless
+
+def writeToCSV (csvFile,rows,fields) :
+    if not os.path.exists(csvFile) :
+        with open(csvFile, 'w') as csvOpen: # Seperated by in libreoffie can't be tab
+            csvWriter = csv.writer(csvOpen) 
+            csvWriter.writerow(fields) 
+            csvWriter.writerows(rows)
 
 main()
