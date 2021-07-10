@@ -8,7 +8,6 @@ def main () :
     
     total_count = 0
     years = []
-    years2 = []
     with open(file, 'r') as total :
         csv_reader = reader(total)
         next(csv_reader) # Skip field header

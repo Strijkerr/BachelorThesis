@@ -63,7 +63,7 @@ def main () :
                             row = [ECLI,ref_ECLI,citation]
                             rows.append(row)
                         except Exception as e :
-                            errorList.append(ECLI) # 10 exceptions here
+                            errorList.append(ECLI) # 9 exceptions here
                     else :
                         refElse+=1
             else :
