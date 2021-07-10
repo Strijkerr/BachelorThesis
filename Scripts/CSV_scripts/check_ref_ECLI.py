@@ -24,7 +24,7 @@ def main () :
             total_count+=1
             if (row[1] == '!') :
                 exclamationMark_count+=1
-            elif (re.match(r"ECLI:..:.+:\d\d\d\d:.+",row[1])) : # ECLI, court code = 2 characters, court code 1-7 characters, year = 4 digits, unique number = max 25 characters
+            elif (re.match(r"ECLI:..:.+:\d\d\d\d:.+^\s",row[1])) : # ECLI, court code = 2 characters, court code 1-7 characters, year = 4 digits, unique number = max 25 characters
                 normalECLI_count+=1
                 print(row[1])
             else :

@@ -11,12 +11,12 @@ def checkExcluded (decisionList,OpenDataUitspraken,csvExcluded) :
         if (file not in decisionList) :
             rows_excluded.append(file)
     print("\nRows ecluded: ",len(rows_excluded))
-    print("Rows ecluded (set): ",len(set(rows_excluded)))
     if not os.path.exists(csvExcluded) :
         with open(csvExcluded, 'w') as csvOpen: # Seperated by in libreoffie can't be tab
             csvWriter = csv.writer(csvOpen) 
             csvWriter.writerow(["ECLI"]) 
-            csvWriter.writerows([rows_excluded])
+            for row in rows_excluded :
+                csvWriter.writerow([row]) 
 
 def main () :
     OpenDataUitspraken = sys.argv[1]
