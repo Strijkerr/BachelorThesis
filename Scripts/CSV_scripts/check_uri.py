@@ -41,20 +41,23 @@ def main () :
 
     with open(file, 'r') as total :
         csv_reader = reader(total)
-        next(csv_reader)
+        next(csv_reader) # Skip header
         for row in csv_reader :
             total_count+=1
             court = row[0].split(':')[2]
             courts.append(court_type(court))
             target = row[1]
+            # if (row[2] == "ELCI") :
+            #     print(row[0],target,row[2])
             if (target == '!') :
                 exclamationMark_count+=1
             elif (target == "") :
                 empty_count+=1
             elif (target.endswith("~")) :
+                #print(row[0],target,row[2])
                 tilde_count+=1
             elif ("ECLI" not in target or "<" in target) :
-                print("Weird target: ",target)
+                #print(row[0],target,row[2])
                 other_count+=1
             elif ("!" in target and "ECLI" in target) :
                 multiple_count1+=1
@@ -64,7 +67,7 @@ def main () :
                 normal_count+=1
             else :
                 else_count+=1
-    print("\nFrequencies of references vs. court", Counter(courts).most_common(),'\n')
+    print("Frequencies of references vs. court", Counter(courts).most_common())
     printStats(normal_count,exclamationMark_count,multiple_count1,multiple_count2,empty_count,tilde_count,other_count,total_count,else_count)
 
 main()
