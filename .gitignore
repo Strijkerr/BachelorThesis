@@ -144,8 +144,7 @@ DataSets/OpenDataUitspraken_100
 DataSets/OpenDataUitspraken_full
 CSV/Future.csv
 CSV/Total.csv
-CSV/EmptyC.csv
-CSV/EmptyR.csv
-CSV/Missing.csv
-CSV/RefError.csv
-CSV/SelfRef.csv
+CSV/Normal.csv
+CSV/Excluded.csv
+CSV/Recent.csv
+CSV/Self.csv
