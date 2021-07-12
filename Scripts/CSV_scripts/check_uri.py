@@ -80,6 +80,7 @@ def main () :
                 normal_count+=1
             else :
                 else_count+=1
+
     print("Frequencies of references vs. court", Counter(courts).most_common())
     printStats(normal_count,exclamationMark_count,multiple_count1,multiple_count2,empty_count,tilde_count,other_count,total_count,else_count)
     writeToCSV(new_rows)
