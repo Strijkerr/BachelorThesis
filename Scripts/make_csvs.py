@@ -4,7 +4,6 @@ import os
 import csv
 import sys
 
-
 def checkExcluded (decisionList,OpenDataUitspraken,csvExcluded) :
     rows_excluded = []
     for file in os.listdir(OpenDataUitspraken) :
