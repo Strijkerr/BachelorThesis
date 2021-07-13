@@ -142,5 +142,7 @@ DataSets/lidodata.gz
 # kan later weg
 DataSets/OpenDataUitspraken_100
 DataSets/OpenDataUitspraken_full
+CSV/*
+CSV/
 CSV
 
