@@ -6,7 +6,7 @@ from collections import Counter
 import shutil
 
 def main () :
-    anchor_text = "Haviltex"
+    anchor_text = "vitale"
     file = os.getcwd() + "/CSV/" + anchor_text + ".csv"
     folder = os.getcwd() + "/DataSets/OpenDataUitspraken/"
     #folder2 = os.getcwd() + "/DataSets/" + "Cichowski/" # For creating new map
@@ -17,7 +17,7 @@ def main () :
     with open(file, 'r') as total :
         csv_reader = reader(total)
         next(csv_reader) # Skip header
-        regex = re.compile(r'\b(\w+)\b \b{}\b'.format(anchor_text)) 
+        regex = re.compile(r'\b{}\b \b(\w+)\b'.format(anchor_text)) 
         for row in csv_reader :
             count+=1
             # if ("griffier" in row[3]  or "rechter" in row[3] or "voorzitter" in row[3]) :

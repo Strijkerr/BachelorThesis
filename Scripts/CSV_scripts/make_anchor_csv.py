@@ -57,8 +57,9 @@ def writeToCSV (csvFile,rows) :
 def main () :
     count = 0
     cwd = os.getcwd()
+    anchor_text = "vitale"
     file = cwd + "/CSV/Total.csv"
-    reference_csv = cwd + "/CSV/Vitale.csv"
+    reference_csv = cwd + "/CSV/" + anchor_text + ".csv"
     reference_rows = []
     reference_found = 0
     reference_count = 0
@@ -69,7 +70,7 @@ def main () :
         for row in csv_reader :
             count+=1
             xmlDecision = cwd + "/DataSets/OpenDataUitspraken/" + row[0].replace(":","_") + ".xml"
-            if (row[2] == "vitale") :
+            if (row[2] == anchor_text) :
                 reference_count+=1
                 reference_found+=findReference(xmlDecision,row,reference_rows)
             
