@@ -45,6 +45,7 @@ def main () :
     normal_count = 0
     exclamationMark_count = 0
     multiple_count1 = 0
+    multiple_count11 = 0
     multiple_count2 = 0
     empty_count = 0
     tilde_count = 0
@@ -66,11 +67,19 @@ def main () :
             elif (target == "") :
                 empty_count+=1
             elif (target.endswith("~")) :
-                #print(row[0],target,row[2])
                 tilde_count+=1
             elif ("ECLI" not in target or "<" in target) :
                 other_count+=1
             elif ("!" in target and "ECLI" in target) :
+                years_here = []
+                courts_here = []
+                for i in row[1].split("!")[1:] :
+                    years_here.append(i.split(":")[3])
+                    courts_here.append(i.split(":")[2])
+                if (len(set(years_here)) == 1 and len(set(courts_here)) == 1) :
+                    multiple_count11+=1
+                # if (row[1].split(":")[3] == row[1].split(":")[7] and row[1].split(":")[2] == row[1].split(":")[6]) :
+                #     multiple_count11+=1
                 printList.append(row[2])
                 multiple_count1+=1
             elif ('!' not in target and target.count("ECLI") > 1) :
@@ -85,5 +94,6 @@ def main () :
     printStats(normal_count,exclamationMark_count,multiple_count1,multiple_count2,empty_count,tilde_count,other_count,total_count,else_count)
     writeToCSV(new_rows)
     print(Counter(printList).most_common(100))
+    print("Same year and court",multiple_count11)
 
 main()

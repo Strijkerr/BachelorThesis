@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 
 # Print bar plot
 def plot (subject_dict) :
-    plt.xlabel("Rechtsgebieden")
-    plt.ylabel("Arresten")
+    plt.xlabel("Areas of law")
+    plt.ylabel("Court decisions")
     plt.xticks(rotation=90)
     plt.bar(subject_dict.keys(), subject_dict.values())
     plt.show() 
