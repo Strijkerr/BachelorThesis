@@ -74,6 +74,6 @@ def main () :
                 reference_found+=findReference(xmlDecision,row,reference_rows)
             
     print("Total references: ",reference_count,"\tReferences found: ",reference_found,"\tReferences to check: ",len(reference_rows))
-    #writeToCSV(reference_csv,reference_rows)
+    writeToCSV(reference_csv,reference_rows)
 
 main()
