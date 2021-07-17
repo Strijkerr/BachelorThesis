@@ -19,7 +19,7 @@ def checkExcluded (decisionList,OpenDataUitspraken,csvExcluded) :
 
 def main () :
     OpenDataUitspraken = sys.argv[1]
-    BachelorThesis = sys.argv[2]
+    cwd = sys.argv[2]
     lidodata = sys.argv[3]
 
     citationCount = 0
@@ -29,7 +29,7 @@ def main () :
     refNone = 0
     refElse = 0
     aboutElse = 0
-    csvFile = BachelorThesis + "/CSV/Total.csv"
+    csvFile = cwd + "/DataSets/CSV/Total.csv"
     rows = []
     aboutNone = 0
     aboutECLI = 0 
@@ -75,7 +75,7 @@ def main () :
     writeToCSV(csvFile,rows,["ECLI","Ref_ECLI","Anchor text"])
     var = input("\nTo also print CSV list with excluded files, type 'yes: ")
     if (var == 'yes') :
-        checkExcluded(decisionList,OpenDataUitspraken,BachelorThesis + "/CSV/Excluded.csv")
+        checkExcluded(decisionList,OpenDataUitspraken,cwd + "/DataSets/CSV/Excluded.csv")
 
 def printErrorlist(errorList) :
     if errorList :
