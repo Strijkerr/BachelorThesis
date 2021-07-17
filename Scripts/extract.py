@@ -3,19 +3,22 @@ from lxml import etree
 import os
 import csv
 import sys
+from collections import Counter
 
 def checkExcluded (decisionList,OpenDataUitspraken,csvExcluded) :
-    rows_excluded = []
+    years = []
+    temp_count = 0
     for file in os.listdir(OpenDataUitspraken) :
         if (file not in decisionList) :
-            rows_excluded.append(file)
-    print("\nRows ecluded: ",len(rows_excluded))
-    if not os.path.exists(csvExcluded) :
-        with open(csvExcluded, 'w') as csvOpen: # Seperated by in libreoffie can't be tab
-            csvWriter = csv.writer(csvOpen) 
-            csvWriter.writerow(["ECLI"]) 
-            for row in rows_excluded :
-                csvWriter.writerow([row]) 
+            temp_count+=1
+            year = file.split('_')[3]
+            if (int(year) < 2019) :
+                years.append('<= 2018')
+            else :
+                years.append(year)
+    print("\nCourt decisions ecluded: ",temp_count)
+    print("Court decisions excluded distribution over years: ",Counter(years).most_common())
+
 
 def main () :
     OpenDataUitspraken = sys.argv[1]
@@ -29,7 +32,7 @@ def main () :
     refNone = 0
     refElse = 0
     aboutElse = 0
-    csvFile = cwd + "/DataSets/CSV/Total.csv"
+    csvFile = cwd + "/CSV/Total.csv"
     rows = []
     aboutNone = 0
     aboutECLI = 0 
@@ -73,7 +76,7 @@ def main () :
     printStats(aboutECLI,decisionList,decisionList2,citationCount,aboutNone,aboutElse,decisionNotPresent,refNone,refElse)
     printErrorlist(errorList)
     writeToCSV(csvFile,rows,["ECLI","Ref_ECLI","Anchor text"])
-    checkExcluded(decisionList,OpenDataUitspraken,cwd + "/DataSets/CSV/Excluded.csv")
+    checkExcluded(decisionList,OpenDataUitspraken,cwd + "/CSV/Excluded.csv")
 
 def printErrorlist(errorList) :
     if errorList :

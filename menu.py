@@ -103,7 +103,7 @@ def menu_setup () :
         print("3. Remove all court decisions that have no textual parts in them from `OpenDataUitspraken' (< 25 minutes ETA)")
         print("4. Download 'lidodata.gz' (+~1.4GB needs to be available) (ETA < 7 minutes)")
         print("5. Unzip `lidodata.gz` (+~38.2GB needs to be available) (ETA < 11 minutes)")
-        print("6. Extract case law references from `lidodata' to a CSV")
+        print("6. Extract case law references from `lidodata' to a CSV (ETA < 80 minutes)")
         print("7. Exit to main menu")
         var = input('\nEnter action: ')
         if (var == '1') :
