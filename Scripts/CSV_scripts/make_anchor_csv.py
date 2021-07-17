@@ -57,7 +57,7 @@ def writeToCSV (csvFile,rows) :
 def main () :
     count = 0
     cwd = os.getcwd()
-    anchor_text = "vitale"
+    anchor_text = "Cichowski"
     file = cwd + "/CSV/Total.csv"
     reference_csv = cwd + "/CSV/" + anchor_text + ".csv"
     reference_rows = []

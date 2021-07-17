@@ -80,15 +80,13 @@ def menu_edit () :
     if os.path.exists(OpenDataUitspraken) :
         while True :
             print("------------------------------------------------------")
-            print("---------------------EDIT datasets--------------------")
+            print("---------------------CSV TOOLS--------------------")
             print("------------------------------------------------------\n")
-            print("1. Remove all court decisions that have no textual parts in them from `OpenDataUitspraken' (< 25 minutes ETA)")
+            print("1. ....")
             print("2. Exit to main menu")
             var = input('\nEnter action: ')
             if (var == '1') :
-                seconds = timer(True)
-                subprocess.call(['python3','Scripts/filter_OpenDataUitspraken.py',OpenDataUitspraken])
-                print("Seconds:",time.time()-seconds)
+                print("Unused")
             elif (var == '2') :
                 return 
     else :
@@ -102,9 +100,10 @@ def menu_setup () :
         print("------------------------------------------------------\n")
         print("1. Download 'OpenDataUitspraken.zip' (+~5.4GB needs to be available) (ETA < 9 minutes)")
         print("2. Unzip and unpack 'OpenDataUitspraken.zip' (+~24GB needs to be available) (ETA < 37 minutes")
-        print("3. Download 'lidodata.gz' (+~1.4GB needs to be available) (ETA < 7 minutes)")
-        print("4. Unzip `lidodata.gz` (+~38.2GB needs to be available) (ETA < 11 minutes)")
-        print("5. Exit to main menu")
+        print("3. Remove all court decisions that have no textual parts in them from `OpenDataUitspraken' (< 25 minutes ETA)")
+        print("4. Download 'lidodata.gz' (+~1.4GB needs to be available) (ETA < 7 minutes)")
+        print("5. Unzip `lidodata.gz` (+~38.2GB needs to be available) (ETA < 11 minutes)")
+        print("6. Exit to main menu")
         var = input('\nEnter action: ')
         if (var == '1') :
             seconds = timer(False)
@@ -114,15 +113,19 @@ def menu_setup () :
             seconds = timer(False)
             unzip()
             print("Seconds:",time.time()-seconds)
-        elif (var == '3') :
-            seconds = timer(False)
-            download(lidodata_url,lidodata_gz)
+        elif (var == '1') :
+            seconds = timer(True)
+            subprocess.call(['python3','Scripts/filter_OpenDataUitspraken.py',OpenDataUitspraken])
             print("Seconds:",time.time()-seconds)
         elif (var == '4') :
             seconds = timer(False)
-            gzip()
+            download(lidodata_url,lidodata_gz)
             print("Seconds:",time.time()-seconds)
         elif (var == '5') :
+            seconds = timer(False)
+            gzip()
+            print("Seconds:",time.time()-seconds)
+        elif (var == '6') :
             return   
 
 def menu_tools () :

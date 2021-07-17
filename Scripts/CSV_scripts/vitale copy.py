@@ -6,7 +6,7 @@ from collections import Counter
 import shutil
 
 def main () :
-    anchor_text = "vitale"
+    anchor_text = "Cichowski"
     file = os.getcwd() + "/CSV/" + anchor_text + ".csv"
     folder = os.getcwd() + "/DataSets/OpenDataUitspraken/"
     #folder2 = os.getcwd() + "/DataSets/" + "Cichowski/" # For creating new map
@@ -26,7 +26,7 @@ def main () :
             #shutil.copyfile(folder + filename,folder2 + filename) # For creating new map
             for i in regex.findall(row[3]) :
                 wordList.append(i)
-    print(Counter(wordList).most_common(100))
+    print(Counter(wordList).most_common(10))
     print(count)
     print(count1)
 
