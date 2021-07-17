@@ -61,17 +61,17 @@ def main () :
         print("------------------------------------------------------")
         print("----------------------MAIN MENU----------------------")
         print("------------------------------------------------------\n")
-        print("1. Activate setup menu")
-        print("2. Edit 'OpenDataUitspraken'")
-        print("3. Tools 'OpenDataUitspraken'")
+        print("1. Setup menu")
+        print("2. TABLES and FIGURES 'OpenDataUitspraken'")
+        print("3. CSV TOOLS")
         print("4. Exit")
         var = input('\nEnter action: ')
         if (var == '1') :
             menu_setup()
         elif (var == '2') :
-            menu_edit()
-        elif (var == '3') :
             menu_tools()
+        elif (var == '3') :
+            menu_edit()
         elif (var == '4') :
             print("Program ended.")
             return  
@@ -138,7 +138,7 @@ def menu_tools () :
     if os.path.exists(OpenDataUitspraken) :
         while True :
             print("-------------------------------------------------------")
-            print("---------------TOOLS 'OpenDataUitspraken'--------------")
+            print("--------TABLES and FIGURES 'OpenDataUitspraken'--------")
             print("-------------------------------------------------------\n")
             print("1. Get court-decision count (< 3 seconds ETA)")
             print("2. Overview existence of judgments/advisory opinions and abstracts in dataset (< 90 minutes ETA)")
