@@ -73,9 +73,7 @@ def main () :
     printStats(aboutECLI,decisionList,decisionList2,citationCount,aboutNone,aboutElse,decisionNotPresent,refNone,refElse)
     printErrorlist(errorList)
     writeToCSV(csvFile,rows,["ECLI","Ref_ECLI","Anchor text"])
-    var = input("\nTo also print CSV list with excluded files, type 'yes: ")
-    if (var == 'yes') :
-        checkExcluded(decisionList,OpenDataUitspraken,cwd + "/DataSets/CSV/Excluded.csv")
+    checkExcluded(decisionList,OpenDataUitspraken,cwd + "/DataSets/CSV/Excluded.csv")
 
 def printErrorlist(errorList) :
     if errorList :
