@@ -6,7 +6,7 @@ from collections import Counter
 import shutil
 
 def main () :
-    anchor_text = "Cichowski"
+    anchor_text = "vitale"
     file = os.getcwd() + "/CSV/" + anchor_text + ".csv"
     folder = os.getcwd() + "/DataSets/OpenDataUitspraken/"
     #folder2 = os.getcwd() + "/DataSets/" + "Cichowski/" # For creating new map
@@ -27,7 +27,7 @@ def main () :
             for i in regex.findall(row[3]) :
                 wordList.append(i)
     print(Counter(wordList).most_common(10))
-    print(count)
-    print(count1)
+    print("Rows counted: ",count)
+    #print("`Griffier', `rechter' or `voorzitter' in paragraph: ",count1)
 
 main()

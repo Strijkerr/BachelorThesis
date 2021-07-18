@@ -13,18 +13,18 @@ def main () :
         next(csv_reader) # Skip header
         for row in csv_reader :
             anchor = row[2]
-            #anchors.append(anchor)
+            anchors.append(anchor)
             if (anchor == "") :
                 empty_count+=1
-            elif (" " not in anchor and "\t" not in anchor and "ECLI" not in anchor and ":" not in anchor) :
-                if (anchor != "conclusie") :
-                    if not (anchor[0].isupper()) :
-                        if not (anchor.isdigit()) :
-                            anchors.append(anchor)
-                            print(row)
-                            else_count+=1
+            # elif (" " not in anchor and "\t" not in anchor and "ECLI" not in anchor and ":" not in anchor) :
+            #     if (anchor != "conclusie") :
+            #         if not (anchor[0].isupper()) :
+            #             if not (anchor.isdigit()) :
+            #                 anchors.append(anchor)
+            #                 print(row)
+            #                 else_count+=1
+    # print("Else: ",else_count)
     print("Empty anchor text: ",empty_count)
-    print("Else: ",else_count)
     print('Frequencies: ',Counter(anchors).most_common(100))
 
 main()
