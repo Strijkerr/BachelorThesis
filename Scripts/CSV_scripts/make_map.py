@@ -22,7 +22,6 @@ def main () :
             filename = row[0].replace(':','_')+".xml"
             if not os.path.exists(decicated_map + filename) :
                 shutil.copyfile(OpenDataUitspraken + filename,decicated_map + filename) # For creating new map
-
     print("Rows counted: ",count)
 
 main()

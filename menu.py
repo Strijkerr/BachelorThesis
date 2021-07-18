@@ -85,13 +85,23 @@ def menu_edit () :
             print("---------------------CSV TOOLS--------------------")
             print("------------------------------------------------------\n")
             print("1. Print most common anchor texts in extracted references")
-            print("2. Exit to main menu")
+            print("2. Print reference statistics and more")
+            print("3. Make dedicated csv for 1 anchor text")
+            print("4. Exit to main menu")
             var = input('\nEnter action: ')
             if (var == '1') :
                 seconds = timer(True)
                 subprocess.call(['python3','Scripts/CSV_scripts/most_common_anchors.py',CSV_total])
                 print("Seconds:",time.time()-seconds)
-            elif (var == '2') :
+            if (var == '2') :
+                seconds = timer(True)
+                subprocess.call(['python3','Scripts/CSV_scripts/check_uri.py',CSV_total])
+                print("Seconds:",time.time()-seconds)
+            if (var == '3') :
+                seconds = timer(True)
+                #subprocess.call(['python3','Scripts/CSV_scripts/check_uri.py',CSV_total])
+                print("Seconds:",time.time()-seconds)
+            elif (var == '4') :
                 return 
     else :
         print("'" + OpenDataUitspraken + "' does not exist yet, please download/unzip it first.\n")

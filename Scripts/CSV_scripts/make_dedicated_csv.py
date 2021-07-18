@@ -2,7 +2,6 @@
 from csv import reader
 import csv
 import os
-from collections import Counter
 from lxml import etree
 
 def findReference(file,row,rows) :

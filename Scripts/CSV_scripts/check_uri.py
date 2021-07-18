@@ -3,6 +3,7 @@ from csv import reader
 import csv
 import os
 import re
+import sys
 from collections import Counter
 
 def writeToCSV (rows) :
@@ -15,16 +16,15 @@ def writeToCSV (rows) :
             for row in rows :
                 csvWriter.writerows([row])
 
-def printStats(normal_count,exclamationMark_count,multiple_count1,multiple_count2,empty_count,tilde_count,other_count,total_count,else_count) :
-    print("Normal ECLI count: ",normal_count)
+def printStats(normal_count,exclamationMark_count,multiple_count1,multiple_count2,empty_count,tilde_count,other_count,total_count) :
+    print("Total count: ",total_count)
+    print("Regular ECLI in uri: ",normal_count)
     print("Exclamantion Mark count: ",exclamationMark_count)
     print("Multiple ECLIS with `! infront of them: ",multiple_count1)
     print("Multiple ECLIS: ",multiple_count2)
     print("Empty target: ", empty_count)
     print("Tilde at end: ",tilde_count)
     print("Other count: ",other_count)
-    print("Total count: ",total_count)
-    print("Else count: ",else_count)
 
 def court_type (court) :
     if (court.startswith("RB")) :
@@ -37,7 +37,7 @@ def court_type (court) :
         return("Other")
 
 def main () :
-    file = os.getcwd() + "/CSV/Total.csv"
+    file = sys.argv[1]
     courts = []
 
     printList = []
@@ -51,7 +51,6 @@ def main () :
     tilde_count = 0
     other_count = 0
     total_count = 0
-    else_count = 0
 
     with open(file, 'r') as total :
         csv_reader = reader(total)
@@ -61,7 +60,6 @@ def main () :
             court = row[0].split(':')[2]
             courts.append(court_type(court))
             target = row[1]
-            printList.append(row[2])
             if (target == '!') :
                 exclamationMark_count+=1
             elif (target == "") :
@@ -76,24 +74,21 @@ def main () :
                 for i in row[1].split("!")[1:] :
                     years_here.append(i.split(":")[3])
                     courts_here.append(i.split(":")[2])
-                if (len(set(years_here)) == 1 and len(set(courts_here)) == 1) :
+                if (len(set(years_here)) == 1 and len(set(courts_here)) == 1) : # All ECLIs and court types are the same within 1 uri
                     multiple_count11+=1
-                # if (row[1].split(":")[3] == row[1].split(":")[7] and row[1].split(":")[2] == row[1].split(":")[6]) :
-                #     multiple_count11+=1
                 printList.append(row[2])
                 multiple_count1+=1
             elif ('!' not in target and target.count("ECLI") > 1) :
+                printList.append(row[2])
                 multiple_count2+=1
             elif (re.match(r"ECLI:..:.+:\d\d\d\d:.+",target)) : # ECLI, court code = 2 characters, court code 1-7 characters, year = 4 digits, unique number = max 25 characters
                 new_rows.append(row)
                 normal_count+=1
-            else :
-                else_count+=1
 
-    print("Frequencies of references vs. court", Counter(courts).most_common())
-    printStats(normal_count,exclamationMark_count,multiple_count1,multiple_count2,empty_count,tilde_count,other_count,total_count,else_count)
+    printStats(normal_count,exclamationMark_count,multiple_count1,multiple_count2,empty_count,tilde_count,other_count,total_count)
+    print("\nReference count vs. court", Counter(courts).most_common())
+    print("\nSame year and court in the uri's of ambiguous references",multiple_count11)
     writeToCSV(new_rows)
-    print(Counter(printList).most_common(100))
-    print("Same year and court",multiple_count11)
+    print("\nTop 100 most common anchor texts for ambiguous references: ",Counter(printList).most_common(100))
 
 main()
