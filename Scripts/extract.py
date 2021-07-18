@@ -5,7 +5,7 @@ import csv
 import sys
 from collections import Counter
 
-def checkExcluded (decisionList,OpenDataUitspraken,csvExcluded) :
+def checkExcluded (decisionList,OpenDataUitspraken) :
     years = []
     temp_count = 0
     for file in os.listdir(OpenDataUitspraken) :
@@ -76,7 +76,7 @@ def main () :
     printStats(aboutECLI,decisionList,decisionList2,citationCount,aboutNone,aboutElse,decisionNotPresent,refNone,refElse)
     printErrorlist(errorList)
     writeToCSV(csvFile,rows,["ECLI","Ref_ECLI","Anchor text"])
-    checkExcluded(decisionList,OpenDataUitspraken,cwd + "/CSV/Excluded.csv")
+    checkExcluded(decisionList,OpenDataUitspraken)
 
 def printErrorlist(errorList) :
     if errorList :
