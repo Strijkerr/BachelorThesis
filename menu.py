@@ -99,6 +99,7 @@ def menu_edit () :
                 print("Seconds:",time.time()-seconds)
             if (var == '3') :
                 seconds = timer(True)
+                print("Not implemented yet")
                 #subprocess.call(['python3','Scripts/CSV_scripts/check_uri.py',CSV_total])
                 print("Seconds:",time.time()-seconds)
             elif (var == '4') :
