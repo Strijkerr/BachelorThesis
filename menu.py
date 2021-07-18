@@ -19,6 +19,8 @@ lidodata = cwd + "/DataSets/lidodata"
 lidodata_gz = lidodata + '.gz'
 lidodata_url = "https://data.overheid.nl/OpenDataSets/lido/lidodata.gz"
 
+CSV_total = cwd + "/CSV/Total.csv"
+
 def download (url,zip) :
     today = str(date.today())
     if not os.path.exists(zip) :
@@ -82,11 +84,13 @@ def menu_edit () :
             print("------------------------------------------------------")
             print("---------------------CSV TOOLS--------------------")
             print("------------------------------------------------------\n")
-            print("1. ....")
+            print("1. Print most common anchor texts in extracted references")
             print("2. Exit to main menu")
             var = input('\nEnter action: ')
             if (var == '1') :
-                print("Unused")
+                seconds = timer(True)
+                subprocess.call(['python3','Scripts/CSV_scripts/most_common_anchors.py',CSV_total])
+                print("Seconds:",time.time()-seconds)
             elif (var == '2') :
                 return 
     else :
@@ -129,8 +133,7 @@ def menu_setup () :
         elif (var == '6') :
             seconds = timer(True)
             subprocess.call(['python3','Scripts/extract.py',OpenDataUitspraken,cwd,lidodata])
-            print("Seconds:",time.time()-seconds)
-            return   
+            print("Seconds:",time.time()-seconds)   
         elif (var == '7') :
             return   
 

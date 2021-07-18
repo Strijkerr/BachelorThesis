@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 from csv import reader
-import os
+import sys
 from collections import Counter
 
 def main () :
-    file = os.getcwd() + "/CSV/Total.csv"
+    file = sys.argv[1]
     total_count = 0
     empty_count = 0
     else_count = 0
