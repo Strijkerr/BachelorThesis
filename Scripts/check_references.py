@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-from re import findall
 from bs4 import BeautifulSoup
 import os
 import sys
