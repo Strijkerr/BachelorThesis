@@ -13,15 +13,17 @@ def main () :
     with open(file, 'r') as total :
         csv_reader = reader(total)
         next(csv_reader) # Skip header
-        regex = re.compile(r'\b{}\b \b(\w+)\b'.format(anchor_text)) 
+        regex = re.compile(r'\b{}\b \b(\w+)\b'.format(anchor_text))  # r'\b(\w+)\b \b{}\b' for word preceding the anchor text
         for row in csv_reader :
             total_rows+=1
-            if ("griffier" in row[3]  or "rechter" in row[3] or "voorzitter" in row[3]) : # if anchor_text = 'Cichowski'
-                exception_rows+=1
+            if (anchor_text == "Cichowski") :
+                if ("griffier" in row[3]  or "rechter" in row[3] or "voorzitter" in row[3]) : # If anchor_text = 'Cichowski' e.g.
+                    exception_rows+=1
             for i in regex.findall(row[3]) :
                 wordList.append(i)
     print(Counter(wordList).most_common(10))
     print("Rows counted: ",total_rows)
-    print("`Griffier', `rechter' or `voorzitter' in paragraph: ",exception_rows)
+    if (anchor_text == "Cichowski") :
+        print("`Griffier', `rechter' or `voorzitter' in paragraph: ",exception_rows)
 
 main()
