@@ -28,34 +28,17 @@ Launch 'menu.py' from the working directory to go through the steps of setting u
 
 4. 1
 
-From the setup menu you can download the dataset by entering '1'. You can unzip and unpack it with '2'. 
+From the setup menu one can download the datasets and perform the preprocessing and extraction steps.
 
-After going through these steps, one can exit the 'setup menu' by pressing '3'. 
+5. Run sequentially 1-6
 
-5. 1
+After going through these steps, one can exit the 'setup menu' by pressing '7'. 
 
-6. 2
+6. 7
 
-7. 3
-
-One can then go to the edit 'OpenDataUitspraken' menu by pressing '2' in the main menu.
+One can then go to the see some characteristics of the data by going into the 'TABLES and FIGURES' menu
 
 8. 2
 
-From the edit menu, one can remove the court decisions that are without abstract and without judgment from the dataset. One can go back to the main menu by pressing '2'.
+....
 
-9. 1
-
-10. 2
-
-From the main menu, one can choose to open the 'OpendataUitspraken' tools to use certain tools on the dataset.
-
-11. 3
-
-From this menu, one can use tools to see certain characteristics about the dataset.
-
-<!-- At this point, the datasets should be ready for visualization & analysis -->
-
-One can end the program by pressing '4' in the main menu.
-
-12. 4
