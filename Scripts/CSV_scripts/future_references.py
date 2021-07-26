@@ -15,7 +15,10 @@ def courtType (court_code,court_list) :
         court_list.append(court_code)
 
 def main () :
-    file = os.getcwd() + "/CSV/Normal.csv"
+    file = sys.argv[1] + "/CSV/Normal.csv"
+    if not os.path.exists(file) :
+        print("Run '2' first\n")
+        return
     total_count = 0
     courts = []
     courts2 = []

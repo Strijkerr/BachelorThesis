@@ -112,9 +112,12 @@ def menu_edit () :
                 print("Seconds:",time.time()-seconds)
             if (var == '5') :
                 seconds = timer(True)
+                subprocess.call(['python3','Scripts/CSV_scripts/future_references.py',cwd])
                 print("Seconds:",time.time()-seconds)
             if (var == '6') :
+                var2 = input('\nEnter anchor text: ')
                 seconds = timer(True)
+                subprocess.call(['python3','Scripts/CSV_scripts/make_map.py',var2])
                 print("Seconds:",time.time()-seconds)
             elif (var == '7') :
                 return 
