@@ -3,6 +3,7 @@ from csv import reader
 import csv
 import os
 from lxml import etree
+import sys
 
 def findReference(file,row,rows) :
     newRow = row.copy()
@@ -55,9 +56,12 @@ def writeToCSV (csvFile,rows) :
 
 def main () :
     count = 0
-    cwd = os.getcwd()
-    anchor_text = ""
+    cwd = sys.argv[1]
+    anchor_text = sys.argv[2]
     file = cwd + "/CSV/Normal.csv"
+    if not os.path.exists(file) :
+        print("Run '2' first\n")
+        return
     reference_csv = cwd + "/CSV/" + anchor_text + ".csv"
     reference_rows = []
     reference_found = 0

@@ -87,7 +87,10 @@ def menu_edit () :
             print("1. Print most common anchor texts in extracted references")
             print("2. Print reference statistics and more")
             print("3. Make dedicated csv for 1 anchor text")
-            print("4. Exit to main menu")
+            print("4. Context analysis anchor text")
+            print("5. Check future references")
+            print("6. Make map of court decision in which anchor text is cited")
+            print("7. Exit to main menu")
             var = input('\nEnter action: ')
             if (var == '1') :
                 seconds = timer(True)
@@ -98,11 +101,22 @@ def menu_edit () :
                 subprocess.call(['python3','Scripts/CSV_scripts/check_uri.py',CSV_total])
                 print("Seconds:",time.time()-seconds)
             if (var == '3') :
+                var2 = input('\nEnter anchor text: ')
                 seconds = timer(True)
-                print("Not implemented yet")
-                #subprocess.call(['python3','Scripts/CSV_scripts/check_uri.py',CSV_total])
+                subprocess.call(['python3','Scripts/CSV_scripts/make_dedicated_csv.py',cwd,var2])
                 print("Seconds:",time.time()-seconds)
-            elif (var == '4') :
+            if (var == '4') :
+                var2 = input('\nEnter anchor text: ')
+                seconds = timer(True)
+                subprocess.call(['python3','Scripts/CSV_scripts/context_analysis.py',cwd,var2])
+                print("Seconds:",time.time()-seconds)
+            if (var == '5') :
+                seconds = timer(True)
+                print("Seconds:",time.time()-seconds)
+            if (var == '6') :
+                seconds = timer(True)
+                print("Seconds:",time.time()-seconds)
+            elif (var == '7') :
                 return 
     else :
         print("'" + OpenDataUitspraken + "' does not exist yet, please download/unzip it first.\n")
